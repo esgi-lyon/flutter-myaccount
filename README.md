@@ -1,16 +1,16 @@
 # myaccount
 
-A new Flutter project.
+Account manager flutter app
 
-## Getting Started
+### Launch
 
-This project is a starting point for a Flutter application.
+Use vscode workspace recommandations and verify flutter toolchain with `flutter doctor`
 
-A few resources to get you started if this is your first Flutter project:
+## Resources
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Current step](https://bloclibrary.dev/#/flutterlogintutorial?id=authentication-bloc)
+
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+- [online documentation](https://docs.flutter.dev/), 
