@@ -22,6 +22,13 @@ dependencies:
   bloc: ^8.0.3
   flutter_secure_storage: ^5.0.2
 
+  flutter_localizations:
+    sdk: flutter
+  hive: ^2.2.2
+  shared_preferences: ^2.0.15
+  freezed_annotation: ^2.0.3
+  json_serializable: ^6.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -29,6 +36,8 @@ dev_dependencies:
   bloc_test: ^9.0.2
   mocktail: ^0.2.0
   flutter_lints: ^2.0.0
+  build_runner: ^2.1.11
+  freezed: ^2.0.3+1
 
 flutter:
 
@@ -49,3 +58,8 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+flutter_intl:
+  enabled: true
+  class_name: Content
+  main_locale: en

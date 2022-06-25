@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ffi';
 // import 'package:http/http.dart';
 
-enum AuthenticationStatus { unknown, authenticated, unauthenticated }
+enum AuthenticationStatus { unknown, authenticated, unauthenticated, loading }
 
 class AuthenticationRepository {
   final _controller = StreamController<AuthenticationStatus>();
@@ -17,6 +17,7 @@ class AuthenticationRepository {
     required String username,
     required String password,
   }) async {
+    _controller.add(AuthenticationStatus.loading);
     await Future.delayed(
       const Duration(milliseconds: 300),
       () => _controller.add(AuthenticationStatus.authenticated),
@@ -24,11 +25,13 @@ class AuthenticationRepository {
   }
 
   Future<void> confirm(String uid) async {
+    _controller.add(AuthenticationStatus.loading);
     await Future.delayed(const Duration(milliseconds: 1),
         () => _controller.add(AuthenticationStatus.unknown));
   }
 
   Future<void> consent(String uid) async {
+    _controller.add(AuthenticationStatus.loading);
     await Future.delayed(const Duration(milliseconds: 1),
         () => _controller.add(AuthenticationStatus.unknown));
   }
