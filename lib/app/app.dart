@@ -1,12 +1,15 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myaccount/bloc/authentication/authentication.dart';
+import 'package:myaccount/features/authentication/authentication.dart';
 import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/pages/home.dart';
 import 'package:myaccount/pages/landing.dart';
 import 'package:myaccount/pages/login.dart';
 import 'package:user_repository/user_repository.dart';
+import 'package:hive/hive.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -46,41 +49,18 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: _navigatorKey,
-              title: 'My Accoun',
+        // navigatorKey: _navigatorKey,
+        title: 'My Account',
         theme: ThemeData(
           primarySwatch: Colors.indigo,
         ),
         initialRoute: Routes.landing,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         routes: {
           Routes.login: (context) => const LoginWidget(title: 'Index'),
           Routes.landing: (context) => const LandingPage()
-        }
-      
-      // builder: (context, child) {
-      //   return BlocListener<AuthenticationBloc, AuthenticationState>(
-      //     listener: (context, state) {
-      //       switch (state.status) {
-      //         case AuthenticationStatus.authenticated:
-      //           _navigator.pushAndRemoveUntil<void>(
-      //             HomePage.route(),
-      //             (route) => false,
-      //           );
-      //           break;
-      //         case AuthenticationStatus.unauthenticated:
-      //           _navigator.pushAndRemoveUntil<void>(
-      //             LoginPage.route(),
-      //             (route) => false,
-      //           );
-      //           break;
-      //         default:
-      //           break;
-      //       }
-      //     },
-      //     child: child,
-      //   );
-      // },
-      // onGenerateRoute: (_) => SplashPage.route(),
-    );
+        });
   }
 }

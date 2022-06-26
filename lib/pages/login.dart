@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:myaccount/widget/enable_local_auth_modal_bottom_sheet.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key? key, required this.title}) : super(key: key);
+  const LoginWidget({Key? key, this.title = "Login"}) : super(key: key);
 
   final String title;
 
@@ -130,12 +131,12 @@ class _LoginState extends State<LoginWidget> {
                 height: size.height * .10,
               ),
               const Text(
-                "Bienvenue",
+                "welcome",
                 style: TextStyle(
                     color: Color(0xFF161925),
                     fontWeight: FontWeight.w600,
                     fontSize: 32),
-              ),
+              ).tr(),
               SizedBox(
                 height: size.height * .15,
               ),
@@ -146,7 +147,7 @@ class _LoginState extends State<LoginWidget> {
                   children: [
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Login",
+                        labelText: "login.email".tr(),
                         labelStyle: const TextStyle(color: primaryColor),
                         focusedBorder: UnderlineInputBorder(
                           borderRadius: BorderRadius.circular(0),
@@ -157,7 +158,7 @@ class _LoginState extends State<LoginWidget> {
                       controller: _usernameController,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Required field';
+                          return 'form.required'.tr();
                         }
                         return null;
                       },
@@ -171,10 +172,10 @@ class _LoginState extends State<LoginWidget> {
                     TextFormField(
                       textInputAction: TextInputAction.done,
                       validator: (value) {
-                        return value!.isEmpty ? "Required field" : null;
+                        return value!.isEmpty ? "form.required".tr() : null;
                       },
                       decoration: InputDecoration(
-                        labelText: "Mot de passe",
+                        labelText: "login.password.value".tr(),
                         labelStyle: const TextStyle(color: Color(0xFF95989A)),
                         focusedBorder: UnderlineInputBorder(
                           borderRadius: BorderRadius.circular(0),
@@ -219,7 +220,7 @@ class _LoginState extends State<LoginWidget> {
                     _savePassword = newValue!;
                   });
                 },
-                title: const Text("Se souvenir de moi"),
+                title: const Text("login.password.remember").tr(),
                 activeColor: primaryColor,
               ),
               SizedBox(
@@ -233,7 +234,7 @@ class _LoginState extends State<LoginWidget> {
                       primary: primaryColor,
                       textStyle: const TextStyle(
                           fontSize: 22, fontWeight: FontWeight.bold)),
-                  child: const Text("Connection"),
+                  child: const Text("login.connect").tr(),
                 ),
               ),
               SizedBox(
@@ -243,23 +244,23 @@ class _LoginState extends State<LoginWidget> {
                 child: InkWell(
                   onTap: _onForgotPassword,
                   child: const Text(
-                    "Mot de passe oublié ?",
+                    "login.password.forgotten",
                     style: TextStyle(color: Colors.black54, fontSize: 14),
                     textAlign: TextAlign.center,
-                  ),
+                  ).tr(),
                 ),
               ),
               SizedBox(
                 height: size.height * .035,
               ),
-              const Center(
-                child: Text(
-                  "Vous n'avez pas de compte ? ",
+              Center(
+                child: const Text(
+                  "register.no_account",
                   style: TextStyle(
                     fontSize: 14,
                   ),
                   textAlign: TextAlign.center,
-                ),
+                ).tr(),
               ),
               SizedBox(
                 height: size.height * .01,
@@ -268,13 +269,13 @@ class _LoginState extends State<LoginWidget> {
                 child: InkWell(
                   onTap: _onSignUp,
                   child: const Text(
-                    "S'inscrire ",
+                    "register.key",
                     style: TextStyle(
                         color: primaryColor,
                         fontSize: 16,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
-                  ),
+                  ).tr(),
                 ),
               ),
             ],

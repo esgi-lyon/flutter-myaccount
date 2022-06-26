@@ -9,6 +9,7 @@ environment:
   flutter: ">=1.17.0"
 dependencies: 
   equatable: ^2.0.3
+  ffi: ^2.0.1
   local_auth: ^2.1.0
 
 # dependencies: {}

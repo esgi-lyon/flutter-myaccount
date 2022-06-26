@@ -1,0 +1,19 @@
+{
+    "welcome": "Welcome",
+    "form": {
+        "required": "Required field" 
+    },
+    "login": {
+        "email": "Email",
+        "connect": "Connect",
+        "password": {
+            "value": "Password",
+            "remember": "Remember password",
+            "forgotten": "Forgotten password ?"
+        }
+    },
+    "register": {
+        "value": "Register ?",
+        "no_account": "Not registered ? "
+    }
+}

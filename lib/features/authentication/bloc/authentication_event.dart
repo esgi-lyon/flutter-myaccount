@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 
 part of 'authentication_bloc.dart';
 

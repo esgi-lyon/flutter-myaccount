@@ -1,0 +1,19 @@
+{
+    "welcome": "Bienvenue !",
+    "form": {
+        "required": "Champ requis" 
+    },
+    "login": {
+        "email": "Email",
+        "connect": "Se connecter",
+        "password": {
+            "value": "Mot de passe",
+            "forgotten": "Mot de passe oublié ?",
+            "remember": "Se souvenir de moi"
+        }
+    },
+    "register": {
+        "register": "Register ?",
+        "no_account": "Vous n'avez pas de compte ? "
+    }
+}
