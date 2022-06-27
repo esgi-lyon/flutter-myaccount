@@ -19,5 +19,4 @@ Use vscode workspace recommandations and verify flutter toolchain with `flutter 
 - [ ] use https://pub.dev/packages/easy_localization
 - [ ] Fill repository with api fetch
 - [ ] reactivity with streams and bloc
-- [ ] Forms validation with formz
 - [ ] Button to switch locale

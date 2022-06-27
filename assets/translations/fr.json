@@ -1,5 +1,6 @@
 {
     "welcome": "Bienvenue !",
+    "app": "Mon compte",
     "form": {
         "required": "Champ requis" 
     },
@@ -13,7 +14,7 @@
         }
     },
     "register": {
-        "register": "Register ?",
+        "value": "S'inscrire",
         "no_account": "Vous n'avez pas de compte ? "
     }
 }

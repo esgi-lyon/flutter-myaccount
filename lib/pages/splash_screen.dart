@@ -7,8 +7,8 @@ import 'package:myaccount/pages/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LandingPage extends StatelessWidget {
-  const LandingPage({Key? key}) : super(key: key);
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +16,14 @@ class LandingPage extends StatelessWidget {
       listener: (context, state) =>
           debugPrint("[LANDING PAGE] Receiving event: $state"),
       builder: (context, state) {
-        if (state.status == AuthenticationStatus.unauthenticated || state.status == AuthenticationStatus.unknown)
-          return LoginWidget();
-        else if (state.status == AuthenticationStatus.authenticated) {
-          return Home();
-        } else
-          return LoadingIndicator();
+        if (state.status == AuthenticationStatus.unauthenticated ||
+            state.status == AuthenticationStatus.unknown) {
+          return const Login();
+        } else if (state.status == AuthenticationStatus.authenticated) {
+          return const Home();
+        } else {
+          return const LoadingIndicator();
+        }
       },
     );
   }

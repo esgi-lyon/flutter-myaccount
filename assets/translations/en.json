@@ -1,5 +1,6 @@
 {
     "welcome": "Welcome",
+    "app": "My account",
     "form": {
         "required": "Required field" 
     },

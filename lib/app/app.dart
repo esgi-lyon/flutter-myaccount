@@ -1,10 +1,11 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myaccount/commons/theme.dart';
 import 'package:myaccount/features/authentication/authentication.dart';
 import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/pages/home.dart';
-import 'package:myaccount/pages/landing.dart';
+import 'package:myaccount/pages/splash_screen.dart';
 import 'package:myaccount/pages/login.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:hive/hive.dart';
@@ -39,28 +40,35 @@ class App extends StatelessWidget {
 class AppView extends StatefulWidget {
   @override
   _AppViewState createState() => _AppViewState();
+
+    static _AppViewState of(BuildContext context) =>
+      context.findAncestorStateOfType<_AppViewState>()!;
 }
 
 class _AppViewState extends State<AppView> {
+
   final _navigatorKey = GlobalKey<NavigatorState>();
+  ThemeMode _themeMode = AppTheme.themeMode;
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
+
+  void setThemeMode(ThemeMode mode) => setState(() {
+        _themeMode = mode;
+        AppTheme.saveThemeMode(mode);
+      });
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        // navigatorKey: _navigatorKey,
-        title: 'My Account',
-        theme: ThemeData(
-          primarySwatch: Colors.indigo,
-        ),
-        initialRoute: Routes.landing,
+        navigatorKey: _navigatorKey,
+        title: 'app'.tr(),
+        initialRoute: Routes.splashScreen,
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
+        theme: ThemeData(brightness: Brightness.light),
+        darkTheme: ThemeData(brightness: Brightness.dark),
+        themeMode: _themeMode,
         locale: context.locale,
-        routes: {
-          Routes.login: (context) => const LoginWidget(title: 'Index'),
-          Routes.landing: (context) => const LandingPage()
-        });
+        routes: Routes.tabs);
   }
 }
