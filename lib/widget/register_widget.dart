@@ -2,7 +2,7 @@ import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
 import 'package:myaccount/commons/widgets/button.dart';
 import 'package:myaccount/commons/widgets/icon_button.dart';
-import 'package:myaccount/features/nav/nav.dart';
+import 'package:myaccount/app/nav.dart';
 import 'package:user_repository/user_repository.dart';
 
 // import '../auth/auth_util.dart';

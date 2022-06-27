@@ -31,7 +31,14 @@ class _NavBarPageState extends State<NavBarPage> {
     final routes = Routes.tabs;
     final primaryBackground = AppTheme.of(context).primaryBackground;
 
+    print(_currentPage);
     routes.removeWhere((key, value) => key != _currentPage);
+
+    if (routes.isEmpty) {
+      routes.putIfAbsent(
+          Routes.splashScreen, () => Routes.tabs[Routes.splashScreen]!);
+      _currentPage = Routes.splashScreen;
+    }
 
     return Scaffold(
       body: routes.map((key, value) =>

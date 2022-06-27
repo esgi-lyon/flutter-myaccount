@@ -16,7 +16,9 @@ Use vscode workspace recommandations and verify flutter toolchain with `flutter 
 - [online documentation](https://docs.flutter.dev/), 
 
 # TODO
-- [ ] use https://pub.dev/packages/easy_localization
-- [ ] Fill repository with api fetch
+- [x] use https://pub.dev/packages/easy_localization
+- [x] Before login pages and widget design
+- [ ] Fill repositories with api fetch
 - [ ] reactivity with streams and bloc
-- [ ] Button to switch locale
+- [ ] Settings switch locale
+- [ ] Settings enable face id

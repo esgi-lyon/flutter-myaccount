@@ -14,7 +14,7 @@
         }
     },
     "register": {
-        "value": "Register ?",
+        "value": "Register",
         "no_account": "Not registered ? "
     }
 }

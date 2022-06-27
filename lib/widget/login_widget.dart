@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:myaccount/app/nav.dart';
+import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
+import 'package:myaccount/commons/widgets/button.dart';
 import 'package:myaccount/widget/enable_local_auth_modal_bottom_sheet.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:user_repository/user_repository.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key, this.title = "Login"}) : super(key: key);
@@ -93,9 +97,13 @@ class _LoginState extends State<LoginWidget> {
     ));
   }
 
-  _onForgotPassword() {}
+  _onForgotPassword() async {
+    await Navigator.of(context).pushNamed(Routes.forgot);
+  }
 
-  _onSignUp() {}
+  _onRegister() async {
+    await Navigator.of(context).pushNamed(Routes.register);
+  }
 
   @override
   void initState() {
@@ -270,19 +278,29 @@ class _LoginState extends State<LoginWidget> {
                 ).tr(),
               ),
               SizedBox(
-                height: size.height * .01,
+                height: size.height * .025,
               ),
               Center(
-                child: InkWell(
-                  onTap: _onSignUp,
-                  child: Text(
-                    "register.value",
-                    style: TextStyle(
-                        color: AppTheme.of(context).secondaryText,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ).tr(),
+                // padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                child: InternalButtonWidget(
+                  onPressed: _onRegister,
+                  text: 'register.value'.tr(),
+                  options: InternalButtonOptions(
+                    width: 270,
+                    height: 50,
+                    color: AppTheme.of(context).primaryText,
+                    textStyle: AppTheme.of(context).subtitle2.override(
+                          fontFamily: 'Roboto Slab',
+                          color: AppTheme.of(context).secondaryBackground,
+                          fontSize: 16,
+                        ),
+                    elevation: 3,
+                    borderSide: const BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: 8,
+                  ),
                 ),
               ),
             ],
