@@ -5,11 +5,8 @@ import 'package:myaccount/commons/widgets/icon_button.dart';
 import 'package:myaccount/app/nav.dart';
 import 'package:user_repository/user_repository.dart';
 
-// import '../auth/auth_util.dart';
-import '../main.dart';
+import 'package:myaccount/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class RegisterWidget extends StatefulWidget {
   const RegisterWidget({Key? key}) : super(key: key);
@@ -51,12 +48,12 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
                       child: InternalIconButton(
                         borderColor: Colors.transparent,
                         borderRadius: 30,
@@ -73,7 +70,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                       child: Text(
                         'Back',
                         style: AppTheme.of(context).title1.override(
@@ -106,13 +103,13 @@ class _RegisterWidgetState extends State<RegisterWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
+            padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                    padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                     child: Text(
                       'Create your account by filling in the information below to access the app.',
                       style: AppTheme.of(context).subtitle2.override(
@@ -126,7 +123,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(24, 14, 24, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(24, 14, 24, 0),
             child: Container(
               width: double.infinity,
               height: 60,
@@ -171,14 +168,14 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   filled: true,
                   fillColor: AppTheme.of(context).secondaryBackground,
                   contentPadding:
-                      EdgeInsetsDirectional.fromSTEB(24, 24, 20, 24),
+                     const EdgeInsetsDirectional.fromSTEB(24, 24, 20, 24),
                 ),
                 style: AppTheme.of(context).bodyText1,
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
             child: Container(
               width: double.infinity,
               height: 60,
@@ -223,7 +220,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   filled: true,
                   fillColor: AppTheme.of(context).secondaryBackground,
                   contentPadding:
-                      EdgeInsetsDirectional.fromSTEB(24, 24, 20, 24),
+                      const EdgeInsetsDirectional.fromSTEB(24, 24, 20, 24),
                   suffixIcon: InkWell(
                     onTap: () => setState(
                       () => passwordVisibility = !passwordVisibility,
@@ -243,7 +240,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 0),
             child: Container(
               width: double.infinity,
               height: 60,
@@ -288,7 +285,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   filled: true,
                   fillColor: AppTheme.of(context).secondaryBackground,
                   contentPadding:
-                      EdgeInsetsDirectional.fromSTEB(24, 24, 20, 24),
+                      const EdgeInsetsDirectional.fromSTEB(24, 24, 20, 24),
                   suffixIcon: InkWell(
                     onTap: () => setState(
                       () => confirmPasswordVisibility =
@@ -309,7 +306,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
             child: InternalButtonWidget(
               onPressed: () async {
                 if (passwordController?.text !=
@@ -324,7 +321,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   return;
                 }
 
-                final user = User.empty;
+                const user = User.empty;
                 if (user == null) {
                   return;
                 }

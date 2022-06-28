@@ -4,12 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myaccount/commons/theme.dart';
 import 'package:myaccount/features/authentication/authentication.dart';
 import 'package:myaccount/commons/constants/routes.dart';
-import 'package:myaccount/pages/home.dart';
-import 'package:myaccount/pages/splash_screen.dart';
-import 'package:myaccount/pages/login.dart';
 import 'package:user_repository/user_repository.dart';
 // import 'package:hive/hive.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class App extends StatelessWidget {
