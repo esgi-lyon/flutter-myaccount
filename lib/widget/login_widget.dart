@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:myaccount/app/nav.dart';
 // import 'package:myaccount/app/nav.dart';
 import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
 import 'package:myaccount/commons/widgets/button.dart';
 import 'package:myaccount/widget/enable_local_auth_modal_bottom_sheet.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:user_repository/user_repository.dart';
 // import 'package:user_repository/user_repository.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -126,7 +128,7 @@ class _LoginState extends State<LoginWidget> {
       body: SingleChildScrollView(
         child: Container(
           width: size.width,
-          padding: EdgeInsets.all(size.width - size.width * .85),
+          padding: EdgeInsets.all(size.width - size.width * .90),
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -151,8 +153,8 @@ class _LoginState extends State<LoginWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              24, 14, 24, 0),
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 14, 0, 0),
                           child: Container(
                             width: double.infinity,
                             height: 60,
@@ -208,8 +210,8 @@ class _LoginState extends State<LoginWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              24, 12, 24, 0),
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                           child: Container(
                             width: double.infinity,
                             height: 60,
@@ -295,16 +297,40 @@ class _LoginState extends State<LoginWidget> {
               SizedBox(
                 height: size.height * .05,
               ),
-              SizedBox(
-                width: size.width,
-                child: ElevatedButton(
-                  onPressed: _onFormSubmit,
-                  style: ElevatedButton.styleFrom(
-                      primary: AppTheme.of(context).secondaryColor,
-                      padding: EdgeInsets.all(20),
-                      textStyle: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold)),
-                  child: const Text("login.connect").tr(),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(
+                    top: 24, start: 12, end: 12),
+                child: InternalButtonWidget(
+                  onPressed: () async {
+                    const user = User.empty;
+                    if (user == null) {
+                      return;
+                    }
+
+                    await Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              NavBarPage(initialPage: Routes.home)),
+                      (r) => false,
+                    );
+                  },
+                  text: 'login.connect'.tr(),
+                  options: InternalButtonOptions(
+                    width: size.width,
+                    height: 50,
+                    color: AppTheme.of(context).secondaryColor,
+                    textStyle: AppTheme.of(context).subtitle2.override(
+                          fontFamily: 'Roboto Slab',
+                          color: AppTheme.of(context).secondaryBackground,
+                          fontSize: 16,
+                        ),
+                    elevation: 3,
+                    borderSide: const BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: 8,
+                  ),
                 ),
               ),
               SizedBox(
