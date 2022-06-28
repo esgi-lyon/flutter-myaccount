@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:myaccount/app/nav.dart';
+// import 'package:myaccount/app/nav.dart';
 import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
 import 'package:myaccount/commons/widgets/button.dart';
 import 'package:myaccount/widget/enable_local_auth_modal_bottom_sheet.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:user_repository/user_repository.dart';
+// import 'package:user_repository/user_repository.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key, this.title = "Login"}) : super(key: key);
@@ -27,12 +27,11 @@ class _LoginState extends State<LoginWidget> {
   final String KEY_PASSWORD = "KEY_PASSWORD";
   final String KEY_LOCAL_AUTH_ENABLED = "KEY_LOCAL_AUTH_ENABLED";
 
-  final TextEditingController _usernameController =
-      TextEditingController(text: "");
-  final TextEditingController _passwordController =
+  final TextEditingController emailController = TextEditingController(text: "");
+  final TextEditingController passwordController =
       TextEditingController(text: "");
 
-  bool passwordHidden = true;
+  bool passwordVisibility = false;
   bool _savePassword = true;
 
   var localAuth = LocalAuthentication();
@@ -48,13 +47,13 @@ class _LoginState extends State<LoginWidget> {
           localizedReason: 'Please authenticate to sign in');
 
       if (didAuthenticate) {
-        _usernameController.text = await _storage.read(key: KEY_USERNAME) ?? '';
-        _passwordController.text = await _storage.read(key: KEY_PASSWORD) ?? '';
+        emailController.text = await _storage.read(key: KEY_USERNAME) ?? '';
+        passwordController.text = await _storage.read(key: KEY_PASSWORD) ?? '';
       }
       return;
     }
-    _usernameController.text = await _storage.read(key: KEY_USERNAME) ?? '';
-    _passwordController.text = await _storage.read(key: KEY_PASSWORD) ?? '';
+    emailController.text = await _storage.read(key: KEY_USERNAME) ?? '';
+    passwordController.text = await _storage.read(key: KEY_PASSWORD) ?? '';
   }
 
   _onFormSubmit() async {
@@ -63,10 +62,8 @@ class _LoginState extends State<LoginWidget> {
         await _storage.write(key: KEY_LOCAL_AUTH_ENABLED, value: "false");
 
         // Write values
-        await _storage.write(
-            key: KEY_USERNAME, value: _usernameController.text);
-        await _storage.write(
-            key: KEY_PASSWORD, value: _passwordController.text);
+        await _storage.write(key: KEY_USERNAME, value: emailController.text);
+        await _storage.write(key: KEY_PASSWORD, value: passwordController.text);
 
         if (await localAuth.canCheckBiometrics) {
           // Ask for enable biometric auth
@@ -114,8 +111,8 @@ class _LoginState extends State<LoginWidget> {
   @override
   void dispose() {
     super.dispose();
-    _usernameController.dispose();
-    _passwordController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
   }
 
   @override
@@ -149,79 +146,139 @@ class _LoginState extends State<LoginWidget> {
                 height: size.height * .15,
               ),
               Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "login.email".tr(),
-                        labelStyle: TextStyle(
-                            color: AppTheme.of(context).secondaryText),
-                        focusedBorder: UnderlineInputBorder(
-                          borderRadius: BorderRadius.circular(0),
-                          borderSide: BorderSide(
-                              color: AppTheme.of(context).secondaryColor,
-                              width: 2),
-                        ),
-                      ),
-                      controller: _usernameController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'form.required'.tr();
-                        }
-                        return null;
-                      },
-                      textInputAction: TextInputAction.next,
-                      textCapitalization: TextCapitalization.none,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    SizedBox(
-                      height: size.height * .02,
-                    ),
-                    TextFormField(
-                      textInputAction: TextInputAction.done,
-                      validator: (value) {
-                        return value!.isEmpty ? "form.required".tr() : null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: "login.password.value".tr(),
-                        labelStyle: TextStyle(
-                            color: AppTheme.of(context).secondaryText),
-                        focusedBorder: UnderlineInputBorder(
-                          borderRadius: BorderRadius.circular(0),
-                          borderSide: BorderSide(
-                              color: AppTheme.of(context).secondaryColor,
-                              width: 2),
-                        ),
-                        suffixIcon: InkWell(
-                          onTap: () {
-                            setState(() {
-                              passwordHidden = !passwordHidden;
-                            });
-                          },
-                          child: Icon(
-                            passwordHidden
-                                ? Icons.visibility_off_outlined
-                                : Icons.visibility_outlined,
-                            color: const Color(0xff747881),
-                            size: 23,
+                  key: _formKey,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24, 14, 24, 0),
+                          child: Container(
+                            width: double.infinity,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: AppTheme.of(context).secondaryBackground,
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 5,
+                                  color: Color(0x4D101213),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: TextFormField(
+                              controller: emailController,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'login.email'.tr(),
+                                labelStyle: AppTheme.of(context).bodyText2,
+                                hintText: 'login.email_hint'.tr(),
+                                hintStyle: AppTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: AppTheme.of(context).secondaryText,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                filled: true,
+                                fillColor:
+                                    AppTheme.of(context).secondaryBackground,
+                                contentPadding:
+                                    const EdgeInsetsDirectional.fromSTEB(
+                                        24, 24, 20, 24),
+                              ),
+                              style: AppTheme.of(context).bodyText1,
+                            ),
                           ),
                         ),
-                      ),
-                      controller: _passwordController,
-                      obscureText: passwordHidden,
-                      enableSuggestions: false,
-                      toolbarOptions: const ToolbarOptions(
-                        copy: false,
-                        paste: false,
-                        cut: false,
-                        selectAll: false,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24, 12, 24, 0),
+                          child: Container(
+                            width: double.infinity,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: AppTheme.of(context).secondaryBackground,
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 5,
+                                  color: Color(0x4D101213),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: TextFormField(
+                              controller: passwordController,
+                              obscureText: !passwordVisibility,
+                              decoration: InputDecoration(
+                                labelText: 'Password',
+                                labelStyle: AppTheme.of(context).bodyText2,
+                                hintText: 'Please enter your password...',
+                                hintStyle: AppTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Lexend Deca',
+                                      color: AppTheme.of(context).secondaryText,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                filled: true,
+                                fillColor:
+                                    AppTheme.of(context).secondaryBackground,
+                                contentPadding:
+                                    const EdgeInsetsDirectional.fromSTEB(
+                                        24, 24, 20, 24),
+                                suffixIcon: InkWell(
+                                  onTap: () => setState(
+                                    () => passwordVisibility =
+                                        !passwordVisibility,
+                                  ),
+                                  focusNode: FocusNode(skipTraversal: true),
+                                  child: Icon(
+                                    passwordVisibility
+                                        ? Icons.visibility_outlined
+                                        : Icons.visibility_off_outlined,
+                                    color: AppTheme.of(context).secondaryText,
+                                    size: 22,
+                                  ),
+                                ),
+                              ),
+                              style: AppTheme.of(context).bodyText1,
+                            ),
+                          ),
+                        ),
+                      ])),
               SizedBox(
                 height: size.height * .045,
               ),
@@ -278,10 +335,9 @@ class _LoginState extends State<LoginWidget> {
                 ).tr(),
               ),
               SizedBox(
-                height: size.height * .025,
+                height: size.height * .01,
               ),
               Center(
-                // padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                 child: InternalButtonWidget(
                   onPressed: _onRegister,
                   text: 'register.value'.tr(),

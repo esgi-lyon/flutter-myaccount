@@ -5,7 +5,6 @@ import 'package:myaccount/commons/widgets/icon_button.dart';
 import 'package:myaccount/app/nav.dart';
 import 'package:user_repository/user_repository.dart';
 
-import 'package:myaccount/main.dart';
 import 'package:flutter/material.dart';
 
 class RegisterWidget extends StatefulWidget {
@@ -38,7 +37,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100),
+        preferredSize: const Size.fromHeight(100),
         child: AppBar(
           backgroundColor: AppTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
@@ -53,7 +52,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
                       child: InternalIconButton(
                         borderColor: Colors.transparent,
                         borderRadius: 30,
@@ -83,7 +83,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(24, 10, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
                 child: Text(
                   'Create Account',
                   style: AppTheme.of(context).title1.override(
@@ -94,32 +94,28 @@ class _RegisterWidgetState extends State<RegisterWidget> {
               ),
             ],
           ),
-          actions: [],
+          actions: const [],
           elevation: 0,
         ),
       ),
       backgroundColor: AppTheme.of(context).primaryBackground,
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
+      body: SingleChildScrollView(
+          // mainAxisSize: MainAxisSize.max,
+          child: Column(
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 8),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                    child: Text(
-                      'Create your account by filling in the information below to access the app.',
-                      style: AppTheme.of(context).subtitle2.override(
-                            fontFamily: 'Roboto Slab',
-                            color: AppTheme.of(context).secondaryText,
-                          ),
-                    ),
-                  ),
+            padding: const EdgeInsetsDirectional.fromSTEB(24, 14, 24, 0),
+            child: Expanded(
+              child: Padding(
+                padding: const EdgeInsetsDirectional.all(10),
+                child: Text(
+                  'Create your account by filling in the information below to access the app.',
+                  style: AppTheme.of(context).subtitle2.override(
+                        fontFamily: 'Roboto Slab',
+                        color: AppTheme.of(context).secondaryText,
+                      ),
                 ),
-              ],
+              ),
             ),
           ),
           Padding(
@@ -168,7 +164,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   filled: true,
                   fillColor: AppTheme.of(context).secondaryBackground,
                   contentPadding:
-                     const EdgeInsetsDirectional.fromSTEB(24, 24, 20, 24),
+                      const EdgeInsetsDirectional.fromSTEB(24, 24, 20, 24),
                 ),
                 style: AppTheme.of(context).bodyText1,
               ),
@@ -353,7 +349,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             ),
           ),
         ],
-      ),
+      )),
     );
   }
 }

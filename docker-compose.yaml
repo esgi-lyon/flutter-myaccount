@@ -1,12 +1,12 @@
-version: '3.8'
+version: '3.9'
 services:
 
   auth-server:
-    image: gazgeek/springboot-helloworld
+    image: docker.io/loicroux/auth-server:develop
     networks:
       - internals
     ports:
-      - "8080:8080"
+      - "3333:3333"
     environment:
       - PG_HOST=postgres
     depends_on:

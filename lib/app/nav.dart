@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
-import 'package:myaccount/pages/home.dart';
-import 'package:myaccount/pages/profile.dart';
-import 'package:myaccount/pages/settings.dart';
-import 'package:myaccount/pages/splash_screen.dart';
 
 class NavBarPage extends StatefulWidget {
   NavBarPage({Key? key, required this.initialPage}) : super(key: key);

@@ -1,15 +1,16 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
+
 import 'package:myaccount/commons/theme.dart';
 import 'package:myaccount/commons/widgets/button.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:myaccount/features/authentication/authentication.dart';
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({Key? key}) : super(key: key);
 
   @override
-  _ProfileWidgetState createState() => _ProfileWidgetState();
+  State<ProfileWidget> createState() => _ProfileWidgetState();
 }
 
 class _ProfileWidgetState extends State<ProfileWidget> {
@@ -37,7 +38,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           backgroundColor: AppTheme.of(context).secondaryBackground,
           automaticallyImplyLeading: false,
           flexibleSpace: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 14),
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 14),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -65,7 +66,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
-          children: [
+          children: <Widget>[
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +79,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     shape: BoxShape.circle,
                   ),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+                    padding: const EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
                     child: Container(
                       width: 90,
                       height: 90,
@@ -211,6 +212,22 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                 ),
               ),
+            ),
+            Builder(
+              builder: (context) {
+                final userId = context.select(
+                  (AuthenticationBloc bloc) => bloc.state.user.id,
+                );
+                return Text('UserID: $userId');
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Logout'),
+              onPressed: () {
+                context
+                    .read<AuthenticationBloc>()
+                    .add(AuthenticationLogoutRequested());
+              },
             ),
           ],
         ),

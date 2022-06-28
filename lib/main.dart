@@ -11,9 +11,9 @@ void main() async {
   await AppTheme.initialize();
 
   runApp(EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('fr')],
+      supportedLocales: const [Locale('en'), Locale('fr')],
       path: 'assets/translations',
-      fallbackLocale: Locale('en'),
+      fallbackLocale: const Locale('en'),
       child: App(
         authenticationRepository: AuthenticationRepository(),
         userRepository: UserRepository(),
