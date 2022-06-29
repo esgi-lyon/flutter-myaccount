@@ -3,17 +3,23 @@ import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
 
 class NavBarPage extends StatefulWidget {
-  NavBarPage({Key? key, required this.initialPage}) : super(key: key);
+  const NavBarPage({Key? key, required this.initialPage}) : super(key: key);
 
   final String initialPage;
 
   @override
-  _NavBarPageState createState() => _NavBarPageState();
+  State<NavBarPage> createState() => _NavBarPageState();
 }
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
   String _currentPage = Routes.home;
+
+  _setCurrentPage(int i) {
+    var keys = Routes.bottomMenu.keys.toList();
+    var safeCurrent = keys.length >= i - 1 ? keys[i - 1] : Routes.splashScreen;
+    setState(() => _currentPage = safeCurrent);
+  }
 
   @override
   void initState() {
@@ -23,16 +29,16 @@ class _NavBarPageState extends State<NavBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    final currentIndex = Routes.tabs.keys.toList().indexOf(_currentPage);
-    final routes = Routes.tabs;
+    final currentIndex = Routes.bottomMenu.keys.toList().indexOf(_currentPage);
+    final routes = Routes.all;
     final primaryBackground = AppTheme.of(context).primaryBackground;
 
     print(_currentPage);
-    routes.removeWhere((key, value) => key != _currentPage);
+    print(currentIndex);
 
     if (routes.isEmpty) {
       routes.putIfAbsent(
-          Routes.splashScreen, () => Routes.tabs[Routes.splashScreen]!);
+          Routes.splashScreen, () => Routes.all[Routes.splashScreen]!);
       _currentPage = Routes.splashScreen;
     }
 
@@ -42,9 +48,9 @@ class _NavBarPageState extends State<NavBarPage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (i) =>
-            setState(() => _currentPage = Routes.tabs.keys.toList()[i]),
+            setState(() => _currentPage = Routes.bottomMenu.keys.toList()[i]),
         backgroundColor: primaryBackground,
-        selectedItemColor: AppTheme.of(context).tertiaryColor,
+        selectedItemColor: AppTheme.of(context).secondaryColor,
         unselectedItemColor: Color(0x8A000000),
         showSelectedLabels: false,
         showUnselectedLabels: false,

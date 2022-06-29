@@ -37,12 +37,11 @@ class AppView extends StatefulWidget {
   @override
   _AppViewState createState() => _AppViewState();
 
-    static _AppViewState of(BuildContext context) =>
+  static _AppViewState of(BuildContext context) =>
       context.findAncestorStateOfType<_AppViewState>()!;
 }
 
 class _AppViewState extends State<AppView> {
-
   final _navigatorKey = GlobalKey<NavigatorState>();
   ThemeMode _themeMode = AppTheme.themeMode;
 
@@ -65,6 +64,6 @@ class _AppViewState extends State<AppView> {
         darkTheme: ThemeData(brightness: Brightness.dark),
         themeMode: _themeMode,
         locale: context.locale,
-        routes: Routes.tabs);
+        routes: Routes.all);
   }
 }

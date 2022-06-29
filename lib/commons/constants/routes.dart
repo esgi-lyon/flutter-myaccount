@@ -18,13 +18,19 @@ class Routes {
   static const String logout = '/logout';
   static const String home = '/home';
 
-  static Map<String, WidgetBuilder> tabs = {
-      Routes.login: (context) => const Login(),
-      Routes.home: (context) => const Home(),
-      Routes.splashScreen: (context) => const SplashScreen(),
-      Routes.profile: (context) => const Profile(),
-      Routes.settings: (context) => const Settings(),
-      Routes.register: (context) => const Register(),
-      Routes.forgot: (context) => const Forgot()
+  static Map<String, WidgetBuilder> all = {
+    Routes.login: (context) => const Login(),
+    Routes.home: (context) => const Home(),
+    Routes.splashScreen: (context) => const SplashScreen(),
+    Routes.profile: (context) => const Profile(),
+    Routes.settings: (context) => const Settings(),
+    Routes.register: (context) => const Register(),
+    Routes.forgot: (context) => const Forgot()
+  };
+
+  static Map<String, WidgetBuilder> bottomMenu = {
+    Routes.home: (context) => const Home(),
+    Routes.profile: (context) => const Profile(),
+    Routes.settings: (context) => const Settings()
   };
 }

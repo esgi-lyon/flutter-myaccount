@@ -97,7 +97,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               ],
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
+              padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
               child: TextFormField(
                 controller: yourNameController,
                 obscureText: false,
@@ -121,13 +121,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   filled: true,
                   fillColor: AppTheme.of(context).secondaryBackground,
-                  contentPadding: EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                  contentPadding: const EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                 ),
                 style: AppTheme.of(context).bodyText1,
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
+              padding: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 12),
               child: TextFormField(
                 controller: emaiController,
                 obscureText: false,

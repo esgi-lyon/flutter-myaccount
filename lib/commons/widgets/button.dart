@@ -135,7 +135,7 @@ class _InternalButtonWidgetState extends State<InternalButtonWidget> {
     );
 
     if (widget.icon != null || widget.iconData != null) {
-      return Container(
+      return SizedBox(
         height: widget.options.height,
         width: widget.options.width,
         child: ElevatedButton.icon(
@@ -156,7 +156,7 @@ class _InternalButtonWidgetState extends State<InternalButtonWidget> {
       );
     }
 
-    return Container(
+    return SizedBox(
       height: widget.options.height,
       width: widget.options.width,
       child: ElevatedButton(

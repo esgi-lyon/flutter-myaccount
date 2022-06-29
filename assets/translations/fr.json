@@ -7,7 +7,9 @@
     "login": {
         "email": "Email",
         "connect": "Se connecter",
+        "hint": "Please enter your email...",
         "password": {
+            "hint": "Please enter your password...",
             "value": "Mot de passe",
             "forgotten": "Mot de passe oublié ?",
             "remember": "Se souvenir de moi"
