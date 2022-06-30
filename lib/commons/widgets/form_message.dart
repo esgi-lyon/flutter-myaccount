@@ -21,9 +21,9 @@ class FormMessage extends StatelessWidget {
 
   final bool? infos;
 
-  String translateIssue(dynamic? f) => f?.toString().tr() ?? '';
+  String translateIssue(dynamic f) => f?.toString().tr() ?? '';
 
-  List<String> parseErrors(List<dynamic?>? errors) =>
+  List<String> parseErrors(List<dynamic>? errors) =>
       errors
           ?.where((e) => e != null)
           .where((e) => e is FormzInput && !e.pure)
@@ -33,7 +33,7 @@ class FormMessage extends StatelessWidget {
           .toList() ??
       [];
 
-  List<String> parseInfos(List<dynamic?>? errors) =>
+  List<String> parseInfos(List<dynamic>? errors) =>
       errors?.where((e) => e != null).map(translateIssue).toList() ?? [];
 
   _getListFromMessages(List<String>? errors) {
@@ -67,7 +67,9 @@ class FormMessage extends StatelessWidget {
         child: Align(child: _getListFromMessages(messages)));
   }
 
-  SnackBar getSnackBar(BuildContext context) {
-    return SnackBar(padding: EdgeInsets.zero, content: this);
-  }
+  SnackBar getSnackBar(BuildContext context) => SnackBar(
+        padding: EdgeInsets.zero,
+        content: this,
+        duration: const Duration(seconds: 4),
+      );
 }

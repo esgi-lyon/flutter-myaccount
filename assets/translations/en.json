@@ -1,8 +1,12 @@
 {
     "welcome": "AbClever",
     "app": "My account",
+    "back": "back",
+    "saved": "saved successfully",
+    "apply": "apply",
+    "home": "Home",
     "form": {
-        "required": "Required field" 
+        "required": "Required field"
     },
     "logout": "Logout",
     "login": {
@@ -13,7 +17,10 @@
             "hint": "Please enter your password...",
             "value": "Password",
             "remember": "Remember password",
-            "forgotten": "Forgotten password ?"
+            "forgotten": {
+                "value": "Password forgotten ?",
+                "hint": "We will send you an email with a link to reset your password, please enter the email associated with your account below."
+            }
         },
         "password_confirmation": {
             "value": "Password confirmation",
@@ -21,6 +28,7 @@
         }
     },
     "user": {
+        "submit": "Valider",
         "name": {
             "hint": "Enter your Name...",
             "value": "Name"
@@ -52,8 +60,5 @@
             "hint": "Save your biometric authentication for next times"
         }
     },
-    "back": "back",
-    "saved": "saved successfully",
-    "apply": "apply",
-    "home": "Home"
+    "EmailValidationError.invalid": "Invalid email"
 }

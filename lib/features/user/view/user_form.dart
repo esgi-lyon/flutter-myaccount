@@ -29,10 +29,6 @@ class UserForm extends StatelessWidget {
         color: AppTheme.of(context).tertiaryColor,
         validatedProperties: state.props);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(message.getSnackBar(context));
-    });
+    ScaffoldMessenger.of(context).showSnackBar(message.getSnackBar(context));
   }
 }

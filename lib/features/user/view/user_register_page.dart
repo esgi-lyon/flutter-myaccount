@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myaccount/app/back_app_bar.dart';
+import 'package:myaccount/app/simple_app_bar.dart';
 import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
 import 'package:myaccount/features/user/bloc/user_bloc.dart';
@@ -21,9 +19,7 @@ class RegisterPage extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: AppTheme.of(context).primaryBackground,
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(100),
-            child: BackAppBar(pageTitle: 'register.value'.tr())),
+        appBar: SimpleAppBar('register.value'.tr(), backButton: true),
         body: SingleChildScrollView(
           child: Padding(
               padding: const EdgeInsets.all(12),

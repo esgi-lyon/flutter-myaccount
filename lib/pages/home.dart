@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myaccount/app/simple_app_bar.dart';
 import 'package:myaccount/commons/theme.dart';
 import 'package:myaccount/features/authentication/authentication.dart';
 
@@ -18,14 +19,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: scaffoldKey,
-        appBar: AppBar(
-          backgroundColor: AppTheme.of(context).secondaryColor,
-          automaticallyImplyLeading: false,
-          title: Text('home', style: AppTheme.of(context).title1).tr(),
-          actions: const [],
-          centerTitle: false,
-          elevation: 2,
-        ),
+        appBar: SimpleAppBar('home'.tr()),
         backgroundColor: AppTheme.of(context).primaryBackground,
         body: Column(
             mainAxisAlignment: MainAxisAlignment.center,

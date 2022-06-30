@@ -37,13 +37,13 @@ class App extends StatelessWidget {
 
 class AppView extends StatefulWidget {
   @override
-  _AppViewState createState() => _AppViewState();
+  AppViewState createState() => AppViewState();
 
-  static _AppViewState of(BuildContext context) =>
-      context.findAncestorStateOfType<_AppViewState>()!;
+  static AppViewState of(BuildContext context) =>
+      context.findAncestorStateOfType<AppViewState>()!;
 }
 
-class _AppViewState extends State<AppView> {
+class AppViewState extends State<AppView> {
   final _navigatorKey = GlobalKey<NavigatorState>();
   ThemeMode _themeMode = AppTheme.themeMode;
 

@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:myaccount/commons/theme.dart';
 import 'package:myaccount/commons/widgets/form_message.dart';
-import 'package:myaccount/commons/widgets/internal_button.dart';
-import 'package:myaccount/commons/widgets/internal_text_field.dart';
+import 'package:myaccount/commons/widgets/complex_button.dart';
+import 'package:myaccount/commons/widgets/complex_text_field.dart';
 import 'package:myaccount/features/login/login.dart';
 
 class LoginForm extends StatelessWidget {
@@ -19,9 +19,7 @@ class LoginForm extends StatelessWidget {
         color: AppTheme.of(context).tertiaryColor,
         validatedProperties: state.props);
 
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(message.getSnackBar(context));
+    ScaffoldMessenger.of(context).showSnackBar(message.getSnackBar(context));
   }
 
   @override
@@ -52,7 +50,7 @@ class _UsernameInput extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) => previous.username != current.username,
       builder: (context, state) {
-        return InternalTextField(
+        return ComplexTextField(
           key: const Key('loginForm_usernameInput_textField'),
           onChanged: (username) =>
               context.read<LoginBloc>().add(LoginUsernameChanged(username)),
@@ -70,7 +68,7 @@ class _PasswordInput extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
-        return InternalTextField(
+        return ComplexTextField(
           key: const Key('loginForm_passwordInput_textField'),
           onChanged: (password) =>
               context.read<LoginBloc>().add(LoginPasswordChanged(password)),
@@ -114,7 +112,7 @@ class _LoginButton extends StatelessWidget {
             : InternalButtonWidget(
                 text: 'login.connect'.tr(),
                 key: const Key('loginForm_continue_raisedButton'),
-                options: InternalButtonOptions.of(context),
+                options: ComplexButtonOptions.of(context),
                 onPressed: state.status.isValidated
                     ? () {
                         context.read<LoginBloc>().add(const LoginSubmitted());

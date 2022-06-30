@@ -2,6 +2,7 @@
     "recommendations": [
         "Dart-Code.flutter",
         "Nash.awesome-flutter-snippets",
-        "FelixAngelov.bloc"
+        "FelixAngelov.bloc",
+        "blaxou.freezed"
     ]
 }

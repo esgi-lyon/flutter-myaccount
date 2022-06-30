@@ -1,16 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:myaccount/app/simple_app_bar.dart';
 import 'package:myaccount/commons/theme.dart';
-import 'package:myaccount/commons/widgets/internal_button.dart';
 import 'package:flutter/material.dart';
 
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({Key? key}) : super(key: key);
 
   @override
-  _SettingsWidgetState createState() => _SettingsWidgetState();
+  SettingsWidgetState createState() => SettingsWidgetState();
 }
 
-class _SettingsWidgetState extends State<SettingsWidget> {
+class SettingsWidgetState extends State<SettingsWidget> {
   bool? switchListTileValue1;
   bool? switchListTileValue2;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -19,22 +19,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: AppTheme.of(context).secondaryBackground,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'settings.value',
-          style: AppTheme.of(context).title2.override(
-                fontFamily: 'Roboto Slab',
-                color: AppTheme.of(context).primaryText,
-                fontSize: 22,
-              ),
-        ),
-        actions: const [],
-        centerTitle: false,
-        elevation: 0,
-      ),
-      backgroundColor: AppTheme.of(context).secondaryBackground,
+      appBar: SimpleAppBar('settings.value'.tr()),
+      backgroundColor: AppTheme.of(context).primaryBackground,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -85,31 +71,13 @@ class _SettingsWidgetState extends State<SettingsWidget> {
             subtitle: Text(
               'settings.biometric.hint',
               style: AppTheme.of(context).bodyText2,
-            ),
+            ).tr(),
             activeColor: AppTheme.of(context).secondaryColor,
             activeTrackColor: AppTheme.of(context).secondaryColor,
             dense: false,
             controlAffinity: ListTileControlAffinity.trailing,
-            contentPadding: EdgeInsetsDirectional.fromSTEB(24, 12, 24, 12),
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-            child: InternalButtonWidget(
-              onPressed: () {
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(SnackBar(
-                      content: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          height: 40,
-                          color: AppTheme.of(context).secondaryColor,
-                          child: Align(child: const Text("saved").tr()))));
-              },
-              text: 'apply'.tr(),
-              options: InternalButtonOptions.of(context).override(
-                  color: AppTheme.of(context).secondaryBackground,
-                  textStyle: AppTheme.of(context).subtitle2),
-            ),
+            contentPadding:
+                const EdgeInsetsDirectional.fromSTEB(24, 12, 24, 12),
           ),
         ],
       ),

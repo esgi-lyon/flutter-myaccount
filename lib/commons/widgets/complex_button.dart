@@ -3,8 +3,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myaccount/commons/theme.dart';
 
-class InternalButtonOptions {
-  const InternalButtonOptions({
+class ComplexButtonOptions {
+  const ComplexButtonOptions({
     required this.textStyle,
     required this.elevation,
     required this.height,
@@ -13,7 +13,7 @@ class InternalButtonOptions {
     required this.color,
     this.disabledColor,
     this.disabledTextColor,
-    this.splashColor,
+    this.overlayColor,
     this.iconSize,
     this.iconColor,
     this.iconPadding,
@@ -29,15 +29,14 @@ class InternalButtonOptions {
   final Color color;
   final Color? disabledColor;
   final Color? disabledTextColor;
-  final Color? splashColor;
+  final Color? overlayColor;
   final double? iconSize;
   final Color? iconColor;
   final EdgeInsetsGeometry? iconPadding;
   final BorderRadius borderRadius;
   final BorderSide? borderSide;
 
-  static InternalButtonOptions of(BuildContext context) =>
-      InternalButtonOptions(
+  static ComplexButtonOptions of(BuildContext context) => ComplexButtonOptions(
         width: AppTheme.of(context).buttonWidth,
         height: AppTheme.of(context).buttonHeight,
         color: AppTheme.of(context).primaryText,
@@ -51,8 +50,8 @@ class InternalButtonOptions {
       );
 }
 
-extension InternalButtonOptionsHelper on InternalButtonOptions {
-  InternalButtonOptions override(
+extension InternalButtonOptionsHelper on ComplexButtonOptions {
+  ComplexButtonOptions override(
           {TextStyle? textStyle,
           double? elevation,
           double? height,
@@ -67,7 +66,7 @@ extension InternalButtonOptionsHelper on InternalButtonOptions {
           EdgeInsetsGeometry? iconPadding,
           BorderRadius? borderRadius,
           BorderSide? borderSide}) =>
-      InternalButtonOptions(
+      ComplexButtonOptions(
         width: width ?? this.width,
         height: height ?? this.height,
         color: color ?? this.color,
@@ -75,6 +74,12 @@ extension InternalButtonOptionsHelper on InternalButtonOptions {
         elevation: elevation ?? this.elevation,
         borderSide: borderSide,
         borderRadius: borderRadius ?? this.borderRadius,
+        disabledColor: disabledColor ?? this.disabledColor,
+        disabledTextColor: disabledColor ?? this.disabledTextColor,
+        overlayColor: splashColor ?? this.overlayColor,
+        iconSize: iconSize ?? this.iconSize,
+        iconColor: iconColor ?? this.iconColor,
+        iconPadding: iconPadding ?? this.iconPadding,
       );
 }
 
@@ -93,7 +98,7 @@ class InternalButtonWidget extends StatefulWidget {
   final Widget? icon;
   final IconData? iconData;
   final Function() onPressed;
-  final InternalButtonOptions options;
+  final ComplexButtonOptions options;
   final bool showLoadingIndicator;
 
   @override
@@ -107,7 +112,7 @@ class _InternalButtonWidgetState extends State<InternalButtonWidget> {
   Widget build(BuildContext context) {
     Widget textWidget = loading
         ? Center(
-            child: Container(
+            child: SizedBox(
               width: 23,
               height: 23,
               child: CircularProgressIndicator(
@@ -164,8 +169,10 @@ class _InternalButtonWidgetState extends State<InternalButtonWidget> {
         },
       ),
       overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
-        if (states.contains(MaterialState.pressed)) {
-          return widget.options.splashColor;
+        if (states.contains(MaterialState.pressed) ||
+            states.contains(MaterialState.focused) ||
+            states.contains(MaterialState.hovered)) {
+          return widget.options.overlayColor;
         }
         return null;
       }),

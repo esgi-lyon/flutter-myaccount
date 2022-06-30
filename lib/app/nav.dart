@@ -39,9 +39,9 @@ class _NavBarPageState extends State<NavBarPage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: _setCurrentPage,
-        backgroundColor: AppTheme.of(context).primaryBackground,
+        backgroundColor: AppTheme.of(context).secondaryBackground,
         selectedItemColor: AppTheme.of(context).secondaryColor,
-        unselectedItemColor: AppTheme.of(context).primaryBtnText,
+        unselectedItemColor: AppTheme.of(context).secondaryText,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,

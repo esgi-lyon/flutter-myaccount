@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InternalIconButton extends StatelessWidget {
-  const InternalIconButton(
+class ComplexIconButton extends StatelessWidget {
+  const ComplexIconButton(
       {Key? key,
       required this.borderColor,
       required this.borderRadius,
@@ -29,15 +29,12 @@ class InternalIconButton extends StatelessWidget {
           width: buttonSize,
           height: buttonSize,
           decoration: BoxDecoration(
-            color: fillColor,
-            border: Border.all(
-              color: borderColor ?? Colors.transparent,
-              width: borderWidth ?? 0,
-            ),
-            borderRadius: borderRadius != null
-                ? BorderRadius.circular(borderRadius)
-                : null,
-          ),
+              color: fillColor,
+              border: Border.all(
+                color: borderColor ?? Colors.transparent,
+                width: borderWidth ?? 0,
+              ),
+              borderRadius: BorderRadius.circular(borderRadius)),
           child: IconButton(
             icon: icon,
             onPressed: onPressed,

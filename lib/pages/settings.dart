@@ -11,8 +11,6 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: const SettingsWidget(),
-    );
+    return const SettingsWidget();
   }
 }

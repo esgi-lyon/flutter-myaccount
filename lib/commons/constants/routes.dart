@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myaccount/commons/widgets/loading_indicator.dart';
 import 'package:myaccount/features/login/view/login_view.dart';
-import 'package:myaccount/features/user/view/user_forgot.dart';
+import 'package:myaccount/features/user/view/user_forgot_page.dart';
 import 'package:myaccount/features/user/view/user_view.dart';
 import 'package:myaccount/pages/home.dart';
 import 'package:myaccount/pages/settings.dart';

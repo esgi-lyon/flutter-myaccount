@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:myaccount/commons/theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class InternalTextField extends StatelessWidget {
-  const InternalTextField(
+class ComplexTextField extends StatelessWidget {
+  const ComplexTextField(
       {Key? key,
       this.textController,
       required this.labelText,

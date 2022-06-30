@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
-import 'package:myaccount/commons/widgets/internal_button.dart';
+import 'package:myaccount/commons/widgets/complex_button.dart';
 import 'package:myaccount/features/login/login.dart';
 
 class LoginPage extends StatelessWidget {
@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
                       child: InkWell(
                         onTap: _onForgotPassword,
                         child: Text(
-                          "login.password.forgotten",
+                          "login.password.forgotten.value",
                           style: TextStyle(
                               color: AppTheme.of(context).secondaryText,
                               fontSize: 14),
@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
                       thickness: 2,
                       indent: 20,
                       endIndent: 0,
-                      color: AppTheme.of(context).primaryBackground,
+                      color: AppTheme.of(context).gray200,
                     ),
                     const Padding(padding: EdgeInsets.all(12)),
                     Center(
@@ -83,7 +83,7 @@ class LoginPage extends StatelessWidget {
                       child: InternalButtonWidget(
                         onPressed: _onRegister,
                         text: 'register.value'.tr(),
-                        options: InternalButtonOptions.of(context).override(
+                        options: ComplexButtonOptions.of(context).override(
                             color: AppTheme.of(context).secondaryBackground,
                             textStyle: AppTheme.of(context).subtitle2),
                       ),

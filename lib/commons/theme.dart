@@ -7,7 +7,7 @@ import 'package:myaccount/app/app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const kThemeModeKey = '__theme_mode__';
-SharedPreferences? _prefs = null;
+SharedPreferences? _prefs;
 
 abstract class AppTheme {
   static Future initialize() async =>
@@ -108,7 +108,7 @@ abstract class AppTheme {
 
 class LightModeTheme extends AppTheme {
   final primaryColor = const Color(0xFFFFFFFF);
-  final secondaryColor = Color(0xFF5656A9);
+  final secondaryColor = const Color(0xFF5656A9);
   final tertiaryColor = const Color(0xFFB76B54);
   final alternate = const Color(0xFF5C90E7);
   final primaryBackground = const Color(0xFFF1F4F8);
