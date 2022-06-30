@@ -109,7 +109,7 @@ abstract class AppTheme {
 class LightModeTheme extends AppTheme {
   final primaryColor = const Color(0xFFFFFFFF);
   final secondaryColor = const Color(0xFF808080);
-  final tertiaryColor = const Color(0xFF4C4C4C);
+  final tertiaryColor = const Color(0xFFB76B54);
   final alternate = const Color(0xFF5C90E7);
   final primaryBackground = const Color(0xFFF1F4F8);
   final secondaryBackground = const Color(0xFFFFFFFF);

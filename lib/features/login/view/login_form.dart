@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:myaccount/commons/theme.dart';
+import 'package:myaccount/commons/widgets/form_message.dart';
 import 'package:myaccount/commons/widgets/internal_button.dart';
 import 'package:myaccount/commons/widgets/internal_text_field.dart';
 import 'package:myaccount/features/login/login.dart';
@@ -10,17 +11,28 @@ import 'package:myaccount/features/login/login.dart';
 class LoginForm extends StatelessWidget {
   const LoginForm({Key? key}) : super(key: key);
 
+  snackFromState(LoginState state, BuildContext context) {
+    var message = FormMessage(
+        status: state.status,
+        color: AppTheme.of(context).tertiaryColor,
+        submissionErrors: [
+          state.status.name
+        ],
+        validationErrors: [
+          state.password.error,
+          state.username.error
+        ]);
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(message.getSnackBar(context));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
-        if (state.status.isSubmissionFailure) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text(state.status.name).tr()),
-            );
-        }
+        snackFromState(state, context);
       },
       child: Align(
         alignment: const Alignment(0, -1 / 3),
@@ -50,8 +62,6 @@ class _UsernameInput extends StatelessWidget {
               context.read<LoginBloc>().add(LoginUsernameChanged(username)),
           hintText: 'login.hint'.tr(),
           labelText: 'login.email'.tr(),
-          errorText:
-              state.username.valid ? null : state.username.error.toString(),
         );
       },
     );
@@ -70,8 +80,6 @@ class _PasswordInput extends StatelessWidget {
               context.read<LoginBloc>().add(LoginPasswordChanged(password)),
           labelText: 'login.password.value'.tr(),
           hintText: 'login.password.hint'.tr(),
-          errorText:
-              state.password.valid ? null : state.password.error.toString(),
         );
       },
     );
