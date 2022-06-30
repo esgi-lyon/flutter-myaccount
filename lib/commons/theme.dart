@@ -50,6 +50,18 @@ abstract class AppTheme {
   late Color tertiary400;
   late Color textColor;
 
+  // Button defaults
+  late double buttonWidth = 270;
+  late double buttonHeight = 50;
+  late BorderSide buttonBorderSide = const BorderSide(
+    color: Colors.transparent,
+    width: 1,
+  );
+  late double buttonBorderRadiusNb = 10;
+  late BorderRadius buttonBorderRadius =
+      BorderRadius.circular(buttonBorderRadiusNb);
+  late double buttonElevation = 3;
+
   TextStyle get title1 => GoogleFonts.getFont(
         'Roboto Slab',
         color: primaryText,
@@ -77,7 +89,7 @@ abstract class AppTheme {
   TextStyle get subtitle2 => GoogleFonts.getFont(
         'Roboto Slab',
         color: secondaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
         fontSize: 16,
       );
   TextStyle get bodyText1 => GoogleFonts.getFont(
@@ -168,7 +180,7 @@ extension TextStyleHelper on TextStyle {
             );
 }
 
-extension FFStringExt on String {
+extension StringExt on String {
   String maybeHandleOverflow(
           {required int maxChars, String replacement = ''}) =>
       maxChars != null && length > maxChars

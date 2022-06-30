@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class EnableLocalAuthModalBottomSheet extends StatelessWidget {
-
   final void Function() action;
 
-  const EnableLocalAuthModalBottomSheet({Key? key, required this.action}) : super(key: key);
+  const EnableLocalAuthModalBottomSheet({Key? key, required this.action})
+      : super(key: key);
 
   static const Color primaryColor = Color(0xFF13B5A2);
 
@@ -18,13 +18,17 @@ class EnableLocalAuthModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const Icon(Icons.fingerprint_outlined, size: 100, color: primaryColor,),
+          const Icon(
+            Icons.fingerprint_outlined,
+            size: 100,
+            color: primaryColor,
+          ),
           const SizedBox(
             height: 10,
           ),
           const Text(
             'Activer authentification empreinte ?',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
           ),
           const SizedBox(
             height: 5,
@@ -42,18 +46,20 @@ class EnableLocalAuthModalBottomSheet extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
                 primary: primaryColor,
-                textStyle: const TextStyle(
-                    fontSize: 22, fontWeight: FontWeight.bold)),
+                textStyle:
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
             child: const Text("OK"),
           ),
           ElevatedButton(
-            onPressed: () => Navigator.pop(context),
-            style: ElevatedButton.styleFrom(
+              onPressed: () => Navigator.pop(context),
+              style: ElevatedButton.styleFrom(
                 primary: Colors.grey[200],
-                textStyle: const TextStyle(
-                    fontSize: 18),),
-            child: const Text("Non merci", style: TextStyle(color: Colors.black54),)
-          )
+                textStyle: const TextStyle(fontSize: 18),
+              ),
+              child: const Text(
+                "Non merci",
+                style: TextStyle(color: Colors.black54),
+              ))
         ],
       ),
     );

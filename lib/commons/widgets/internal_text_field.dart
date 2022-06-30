@@ -3,15 +3,14 @@ import 'package:myaccount/commons/theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class InternalTextField extends StatelessWidget {
-  const InternalTextField(
-      {Key? key,
-      this.textController,
-      required this.labelText,
-      required this.hintText,
-      required this.errorText,
-      this.onChanged,
-      })
-      : super(key: key);
+  const InternalTextField({
+    Key? key,
+    this.textController,
+    required this.labelText,
+    required this.hintText,
+    this.errorText,
+    this.onChanged,
+  }) : super(key: key);
 
   final TextEditingController? textController;
   final String labelText;
@@ -30,24 +29,22 @@ class InternalTextField extends StatelessWidget {
           color: AppTheme.of(context).secondaryBackground,
           boxShadow: const [
             BoxShadow(
-              blurRadius: 5,
+              blurRadius: 8,
               color: Color(0x4D101213),
               offset: Offset(0, 2),
             )
           ],
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: AppTheme.of(context).buttonBorderRadius,
         ),
         child: TextField(
           controller: textController,
           obscureText: false,
           onChanged: onChanged,
-        
           decoration: InputDecoration(
             labelText: labelText.tr(),
             labelStyle: AppTheme.of(context).bodyText2,
             hintText: hintText.tr(),
             errorText: errorText,
-          
             hintStyle: AppTheme.of(context).bodyText1.override(
                   fontFamily: 'Lexend Deca',
                   color: AppTheme.of(context).secondaryText,
@@ -59,14 +56,14 @@ class InternalTextField extends StatelessWidget {
                 color: Color(0x00000000),
                 width: 0,
               ),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: AppTheme.of(context).buttonBorderRadius,
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 color: Color(0x00000000),
                 width: 0,
               ),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: AppTheme.of(context).buttonBorderRadius,
             ),
             filled: true,
             fillColor: AppTheme.of(context).secondaryBackground,

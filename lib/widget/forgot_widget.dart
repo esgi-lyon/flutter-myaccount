@@ -1,9 +1,8 @@
 // import '../auth/auth_util.dart';
-import 'package:myaccount/commons/widgets/button.dart';
+import 'package:myaccount/commons/widgets/internal_button.dart';
 import 'package:myaccount/commons/theme.dart';
-import 'package:myaccount/commons/widgets/icon_button.dart';
+import 'package:myaccount/commons/widgets/internal_icon_button.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ForgotWidget extends StatefulWidget {
   const ForgotWidget({Key? key}) : super(key: key);
@@ -163,40 +162,26 @@ class _ForgotWidgetState extends State<ForgotWidget> {
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
             child: InternalButtonWidget(
-              onPressed: () async {
-                if (emailAddressController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'Email required!',
+                onPressed: () async {
+                  if (emailAddressController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Email required!',
+                        ),
                       ),
-                    ),
-                  );
-                  return;
-                }
-                // TODO state call
-                // await resetPassword(
-                //   email: emailAddressController.text,
-                //   context: context,
-                // );
-              },
-              text: 'Send Link',
-              options: InternalButtonOptions(
-                width: 270,
-                height: 50,
-                color: AppTheme.of(context).primaryText,
-                textStyle: AppTheme.of(context).subtitle2.override(
-                      fontFamily: 'Roboto Slab',
-                      color: AppTheme.of(context).secondaryBackground,
-                    ),
-                elevation: 3,
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
-                  width: 1,
-                ),
-                borderRadius: 8,
-              ),
-            ),
+                    );
+                    return;
+                  }
+                  // TODO state call
+                  // await resetPassword(
+                  //   email: emailAddressController.text,
+                  //   context: context,
+                  // );
+                },
+                text: 'Send Link',
+                options: InternalButtonOptions.of(context)
+                    .override(color: AppTheme.of(context).alternate)),
           ),
         ],
       ),

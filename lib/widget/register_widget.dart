@@ -1,7 +1,7 @@
 import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
-import 'package:myaccount/commons/widgets/button.dart';
-import 'package:myaccount/commons/widgets/icon_button.dart';
+import 'package:myaccount/commons/widgets/internal_button.dart';
+import 'package:myaccount/commons/widgets/internal_icon_button.dart';
 import 'package:myaccount/app/nav.dart';
 import 'package:user_repository/user_repository.dart';
 
@@ -344,7 +344,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                   color: Colors.transparent,
                   width: 1,
                 ),
-                borderRadius: 8,
+                borderRadius: AppTheme.of(context).buttonBorderRadius,
               ),
             ),
           ),

@@ -5,7 +5,6 @@ import 'package:myaccount/commons/theme.dart';
 import 'package:myaccount/features/authentication/authentication.dart';
 import 'package:myaccount/commons/constants/routes.dart';
 import 'package:user_repository/user_repository.dart';
-// import 'package:hive/hive.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class App extends StatelessWidget {
@@ -55,15 +54,18 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        navigatorKey: _navigatorKey,
-        title: 'app'.tr(),
-        initialRoute: Routes.splashScreen,
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        theme: ThemeData(brightness: Brightness.light),
-        darkTheme: ThemeData(brightness: Brightness.dark),
-        themeMode: _themeMode,
-        locale: context.locale,
-        routes: Routes.all);
+      navigatorKey: _navigatorKey,
+      title: 'app'.tr(),
+      initialRoute: Routes.splashScreen,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      theme: ThemeData(brightness: Brightness.light),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+      ),
+      themeMode: _themeMode,
+      locale: context.locale,
+      routes: Routes.all,
+    );
   }
 }

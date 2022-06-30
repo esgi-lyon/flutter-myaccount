@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:myaccount/commons/theme.dart';
 
 class InternalButtonOptions {
   const InternalButtonOptions({
@@ -16,12 +17,12 @@ class InternalButtonOptions {
     this.iconSize,
     this.iconColor,
     this.iconPadding,
-    this.borderRadius,
+    required this.borderRadius,
     this.borderSide,
   });
 
   final TextStyle textStyle;
-  final double? elevation;
+  final double elevation;
   final double height;
   final double width;
   final EdgeInsetsGeometry? padding;
@@ -32,8 +33,49 @@ class InternalButtonOptions {
   final double? iconSize;
   final Color? iconColor;
   final EdgeInsetsGeometry? iconPadding;
-  final double? borderRadius;
+  final BorderRadius borderRadius;
   final BorderSide? borderSide;
+
+  static InternalButtonOptions of(BuildContext context) =>
+      InternalButtonOptions(
+        width: AppTheme.of(context).buttonWidth,
+        height: AppTheme.of(context).buttonHeight,
+        color: AppTheme.of(context).primaryText,
+        textStyle: AppTheme.of(context).subtitle2.override(
+              fontFamily: 'Roboto Slab',
+              color: AppTheme.of(context).secondaryBackground,
+            ),
+        elevation: AppTheme.of(context).buttonElevation,
+        borderSide: AppTheme.of(context).buttonBorderSide,
+        borderRadius: AppTheme.of(context).buttonBorderRadius,
+      );
+}
+
+extension InternalButtonOptionsHelper on InternalButtonOptions {
+  InternalButtonOptions override(
+          {TextStyle? textStyle,
+          double? elevation,
+          double? height,
+          double? width,
+          EdgeInsetsGeometry? padding,
+          Color? color,
+          Color? disabledColor,
+          Color? disabledTextColor,
+          Color? splashColor,
+          double? iconSize,
+          Color? iconColor,
+          EdgeInsetsGeometry? iconPadding,
+          BorderRadius? borderRadius,
+          BorderSide? borderSide}) =>
+      InternalButtonOptions(
+        width: width ?? this.width,
+        height: height ?? this.height,
+        color: color ?? this.color,
+        textStyle: textStyle ?? this.textStyle,
+        elevation: elevation ?? this.elevation,
+        borderSide: borderSide,
+        borderRadius: borderRadius ?? this.borderRadius,
+      );
 }
 
 class InternalButtonWidget extends StatefulWidget {
@@ -101,8 +143,7 @@ class _InternalButtonWidgetState extends State<InternalButtonWidget> {
     ButtonStyle style = ButtonStyle(
       shape: MaterialStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(widget.options.borderRadius ?? 8.0),
+          borderRadius: widget.options.borderRadius,
           side: widget.options.borderSide ?? BorderSide.none,
         ),
       ),
@@ -130,8 +171,7 @@ class _InternalButtonWidgetState extends State<InternalButtonWidget> {
       }),
       padding: MaterialStateProperty.all(widget.options.padding ??
           const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0)),
-      elevation:
-          MaterialStateProperty.all<double>(widget.options.elevation ?? 2.0),
+      elevation: MaterialStateProperty.all<double>(widget.options.elevation),
     );
 
     if (widget.icon != null || widget.iconData != null) {

@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:myaccount/commons/theme.dart';
-import 'package:myaccount/commons/widgets/button.dart';
+import 'package:myaccount/commons/widgets/internal_button.dart';
 
 import 'package:myaccount/features/authentication/authentication.dart';
 
@@ -121,7 +121,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   filled: true,
                   fillColor: AppTheme.of(context).secondaryBackground,
-                  contentPadding: const EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
+                  contentPadding:
+                      const EdgeInsetsDirectional.fromSTEB(20, 24, 0, 24),
                 ),
                 style: AppTheme.of(context).bodyText1,
               ),
@@ -208,7 +209,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       color: Colors.transparent,
                       width: 1,
                     ),
-                    borderRadius: 8,
+                    borderRadius: AppTheme.of(context).buttonBorderRadius,
                   ),
                 ),
               ),

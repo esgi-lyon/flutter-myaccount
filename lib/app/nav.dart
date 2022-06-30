@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
+import 'package:myaccount/extensions/collection.dart';
 
 class NavBarPage extends StatefulWidget {
   const NavBarPage({Key? key, required this.initialPage}) : super(key: key);
@@ -17,7 +18,8 @@ class _NavBarPageState extends State<NavBarPage> {
 
   _setCurrentPage(int i) {
     var keys = Routes.bottomMenu.keys.toList();
-    var safeCurrent = keys.length >= i - 1 ? keys[i - 1] : Routes.splashScreen;
+
+    var safeCurrent = keys.get(i) ?? Routes.home;
     setState(() => _currentPage = safeCurrent);
   }
 
@@ -30,28 +32,16 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final currentIndex = Routes.bottomMenu.keys.toList().indexOf(_currentPage);
-    final routes = Routes.all;
-    final primaryBackground = AppTheme.of(context).primaryBackground;
-
-    print(_currentPage);
-    print(currentIndex);
-
-    if (routes.isEmpty) {
-      routes.putIfAbsent(
-          Routes.splashScreen, () => Routes.all[Routes.splashScreen]!);
-      _currentPage = Routes.splashScreen;
-    }
 
     return Scaffold(
-      body: routes.map((key, value) =>
+      body: Routes.bottomMenu.map((key, value) =>
           MapEntry(key, Builder(builder: value).build(context)))[_currentPage],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
-        onTap: (i) =>
-            setState(() => _currentPage = Routes.bottomMenu.keys.toList()[i]),
-        backgroundColor: primaryBackground,
+        onTap: _setCurrentPage,
+        backgroundColor: AppTheme.of(context).primaryBackground,
         selectedItemColor: AppTheme.of(context).secondaryColor,
-        unselectedItemColor: Color(0x8A000000),
+        unselectedItemColor: const Color(0x8A000000),
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,

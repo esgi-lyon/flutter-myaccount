@@ -14,6 +14,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         super(const LoginState()) {
     on<LoginUsernameChanged>(_onUsernameChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
+    on<LoginPasswordSaveChanged>(_onPasswordSaveChanged);
     on<LoginSubmitted>(_onSubmitted);
   }
 
@@ -38,6 +39,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(
       password: password,
       status: Formz.validate([password, state.username]),
+    ));
+  }
+
+  void _onPasswordSaveChanged(
+    LoginPasswordSaveChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    emit(state.copyWith(
+      passwordSave: event.passwordSave,
+      status: state.status,
     ));
   }
 

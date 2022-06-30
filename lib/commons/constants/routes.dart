@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:myaccount/commons/widgets/loading_indicator.dart';
+import 'package:myaccount/features/login/view/login_page.dart';
 import 'package:myaccount/pages/forgot.dart';
 import 'package:myaccount/pages/home.dart';
-import 'package:myaccount/pages/login.dart';
 import 'package:myaccount/pages/profile.dart';
 import 'package:myaccount/pages/register.dart';
 import 'package:myaccount/pages/settings.dart';
 import 'package:myaccount/pages/splash_screen.dart';
 
 class Routes {
-  /// Global routes
   static const String splashScreen = '/';
   static const String profile = '/profile';
   static const String login = '/login';
@@ -17,15 +17,17 @@ class Routes {
   static const String settings = '/settings';
   static const String logout = '/logout';
   static const String home = '/home';
+  static const String loading = '/loading';
 
   static Map<String, WidgetBuilder> all = {
-    Routes.login: (context) => const Login(),
+    Routes.login: (context) => const LoginPage(),
     Routes.home: (context) => const Home(),
     Routes.splashScreen: (context) => const SplashScreen(),
     Routes.profile: (context) => const Profile(),
     Routes.settings: (context) => const Settings(),
     Routes.register: (context) => const Register(),
-    Routes.forgot: (context) => const Forgot()
+    Routes.forgot: (context) => const Forgot(),
+    Routes.loading: (context) => const LoadingIndicator(),
   };
 
   static Map<String, WidgetBuilder> bottomMenu = {

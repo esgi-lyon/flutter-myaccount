@@ -1,5 +1,4 @@
 export 'package:myaccount/pages/home.dart';
-export 'package:myaccount/pages/login.dart';
 export 'package:myaccount/pages/register.dart';
 export 'package:myaccount/pages/profile.dart';
 export 'package:myaccount/pages/settings.dart';

@@ -1,7 +1,6 @@
 import 'package:myaccount/commons/theme.dart';
-import 'package:myaccount/commons/widgets/button.dart';
+import 'package:myaccount/commons/widgets/internal_button.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({Key? key}) : super(key: key);
@@ -31,7 +30,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                 fontSize: 22,
               ),
         ),
-        actions: [],
+        actions: const [],
         centerTitle: false,
         elevation: 0,
       ),
@@ -127,7 +126,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                   color: AppTheme.of(context).tertiaryColor,
                   width: 1,
                 ),
-                borderRadius: 8,
+                borderRadius: AppTheme.of(context).buttonBorderRadius,
               ),
             ),
           ),
