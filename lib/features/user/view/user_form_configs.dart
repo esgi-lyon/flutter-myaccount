@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:myaccount/features/user/bloc/user_bloc.dart';
 import 'package:myaccount/features/user/view/user_fields.dart';
 
 class UserFormConfigs {
-  static const updateAllSkipEmpty = true;
-
   static final updateInputs = [
     EmailInput(),
     const Padding(padding: EdgeInsets.all(12)),
@@ -21,10 +20,8 @@ class UserFormConfigs {
     const Padding(padding: EdgeInsets.all(12)),
     PasswordInput(),
     const Padding(padding: EdgeInsets.all(12)),
-    SubmitButton(),
+    const SubmitButton(event: UserUpdateSubmitted()),
   ];
-
-  static const registrationSkipEmpty = false;
 
   static final registrationinputs = [
     EmailInput(),
@@ -41,10 +38,9 @@ class UserFormConfigs {
     const Padding(padding: EdgeInsets.all(12)),
     PasswordInput(),
     const Padding(padding: EdgeInsets.all(12)),
-    SubmitButton(),
+    const SubmitButton(event: UserRegistrationSubmitted()),
   ];
 
-  static const forgotAllSkipEmpty = false;
   static final forgotInputs = [
     const Padding(padding: EdgeInsets.all(12)),
     EmailInput(),
@@ -53,6 +49,6 @@ class UserFormConfigs {
     const Padding(padding: EdgeInsets.all(12)),
     ConfirmationPasswordInput(),
     const Padding(padding: EdgeInsets.all(12)),
-    SubmitButton(),
+    const SubmitButton(event: UserUpdateSubmitted()),
   ];
 }

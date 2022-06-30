@@ -22,13 +22,12 @@ class UserForm extends StatelessWidget {
   }
 
   void _snackFromState(BuildContext context, UserState state) {
-    if (state.status.isPure && state.status.isValid) return;
+    if (!state.status.isSubmissionFailure) return;
 
     final message = FormMessage(
-        status: state.status,
         color: AppTheme.of(context).tertiaryColor,
         validatedProperties: state.props);
 
-    ScaffoldMessenger.of(context).showSnackBar(message.getSnackBar(context));
+    message.showSnackBar(context);
   }
 }

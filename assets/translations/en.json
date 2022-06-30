@@ -44,6 +44,7 @@
         "profile": "Change profile informations"
     },
     "register": {
+        "sent": "Sent registration",
         "success": "Successfuly resgistered",
         "value": "Register",
         "no_account": "Not registered ? "
@@ -60,5 +61,10 @@
             "hint": "Save your biometric authentication for next times"
         }
     },
-    "EmailValidationError.invalid": "Invalid email"
+    "EmailValidationError": {
+        "invalid": "Invalid email"
+    },
+    "PasswordValidationError": {
+        "empty": "Invalid password"
+    }
 }

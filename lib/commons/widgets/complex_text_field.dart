@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myaccount/commons/theme.dart';
-import 'package:easy_localization/easy_localization.dart';
 
-class ComplexTextField extends StatelessWidget {
-  const ComplexTextField(
+class SimpleTextField extends StatelessWidget {
+  const SimpleTextField(
       {Key? key,
       this.textController,
       required this.labelText,
@@ -25,28 +24,35 @@ class ComplexTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 14, 0, 0),
       child: Container(
-        width: double.infinity,
-        height: 60,
-        decoration: BoxDecoration(
-          color: AppTheme.of(context).secondaryBackground,
-          boxShadow: const [
-            BoxShadow(
-              blurRadius: 8,
-              color: Color(0x4D101213),
-              offset: Offset(0, 2),
-            )
-          ],
-          borderRadius: AppTheme.of(context).buttonBorderRadius,
-        ),
+        // width: double.infinity,
+        // height: 60,
+        // decoration: BoxDecoration(
+        //   color: AppTheme.of(context).secondaryBackground,
+        //   boxShadow: const [
+        //     BoxShadow(
+        //       blurRadius: 8,
+        //       color: Color(0x4D101213),
+        //       offset: Offset(0, 2),
+        //     )
+        //   ],
+        //   borderRadius: AppTheme.of(context).buttonBorderRadius,
+        // ),
         child: TextField(
           controller: textController,
           obscureText: obscureText ?? false,
           onChanged: onChanged,
           decoration: InputDecoration(
-            labelText: labelText.tr(),
+            labelText: labelText,
             labelStyle: AppTheme.of(context).bodyText2,
-            hintText: hintText.tr(),
+            hintText: hintText,
             errorText: errorText,
+            errorStyle: AppTheme.of(context).bodyText1.override(
+                fontFamily: 'Lexend Deca',
+                color: AppTheme.of(context).tertiaryColor,
+                fontSize: 9,
+                fontWeight: FontWeight.w300),
+            errorBorder: _getErrorBorder(context, 0),
+            focusedErrorBorder: _getErrorBorder(context, 2),
             hintStyle: AppTheme.of(context).bodyText1.override(
                   fontFamily: 'Lexend Deca',
                   color: AppTheme.of(context).secondaryText,
@@ -77,4 +83,12 @@ class ComplexTextField extends StatelessWidget {
       ),
     );
   }
+
+  _getErrorBorder(BuildContext context, double width) => OutlineInputBorder(
+        borderSide: BorderSide(
+          color: AppTheme.of(context).tertiaryColor,
+          width: width,
+        ),
+        borderRadius: AppTheme.of(context).buttonBorderRadius,
+      );
 }

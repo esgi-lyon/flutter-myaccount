@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:myaccount/commons/validations/simple_boolean.dart';
+import 'package:myaccount/commons/extensions/formz_equatable.dart';
 import 'package:myaccount/features/user/validations/user_validations.dart';
 
 part 'login_event.dart';
@@ -59,6 +60,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) async {
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
+
+    if (Formz.validate(state.parseInputs()).isInvalid) {
+      emit(state.copyWith(status: FormzStatus.submissionFailure));
+      return;
+    }
 
     try {
       await _authenticationRepository.logIn(

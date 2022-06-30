@@ -45,7 +45,6 @@ class ForgotPage extends StatelessWidget {
           BlocProvider(
             create: (context) {
               return UserBloc(
-                bypassEmpty: UserFormConfigs.forgotAllSkipEmpty,
                 userRepository: RepositoryProvider.of<UserRepository>(context),
               );
             },

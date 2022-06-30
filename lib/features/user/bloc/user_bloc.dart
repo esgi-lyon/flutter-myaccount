@@ -11,7 +11,7 @@ part 'user_event.dart';
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  UserBloc({required UserRepository userRepository, this.bypassEmpty})
+  UserBloc({required UserRepository userRepository})
       : _userRepository = userRepository,
         super(const UserState()) {
     on<UserEmailChanged>(_onEmailChanged);
@@ -29,8 +29,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   final UserRepository _userRepository;
 
-  final bool? bypassEmpty;
-
   void _onEmailChanged(
     UserEmailChanged event,
     Emitter<UserState> emit,
@@ -38,7 +36,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     final email = Email.dirty(event.email);
     emit(state.copyWith(
       email: email,
-      status: validateOrSkip([email], bypassEmpty),
+      status: Formz.validate([email]),
     ));
   }
 
@@ -49,7 +47,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     final name = SimpleString.dirty(event.name);
     emit(state.copyWith(
       name: name,
-      status: validateOrSkip([name], bypassEmpty),
+      status: Formz.validate([name]),
     ));
   }
 
@@ -60,7 +58,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     final familyName = SimpleString.dirty(event.familyName);
     emit(state.copyWith(
       familyName: familyName,
-      status: validateOrSkip([familyName], bypassEmpty),
+      status: Formz.validate([familyName]),
     ));
   }
 
@@ -71,7 +69,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     final picture = SimpleString.dirty(event.picture);
     emit(state.copyWith(
       picture: picture,
-      status: validateOrSkip([picture], bypassEmpty),
+      status: Formz.validate([picture]),
     ));
   }
 
@@ -82,7 +80,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     final birthDate = SimpleString.dirty(event.birthdate);
     emit(state.copyWith(
       birthdate: birthDate,
-      status: validateOrSkip([birthDate], bypassEmpty),
+      status: Formz.validate([birthDate]),
     ));
   }
 
@@ -93,7 +91,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     final gender = SimpleString.dirty(event.gender);
     emit(state.copyWith(
       gender: gender,
-      status: validateOrSkip([gender], bypassEmpty),
+      status: Formz.validate([gender]),
     ));
   }
 
@@ -104,7 +102,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     final password = Password.dirty(event.password);
     emit(state.copyWith(
       password: password,
-      status: validateOrSkip([password], bypassEmpty),
+      status: Formz.validate([password]),
     ));
   }
 
@@ -115,7 +113,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     final confirmationPassword = Password.dirty(event.passwordConfirmation);
     emit(state.copyWith(
       confirmationPassword: confirmationPassword,
-      status: validateOrSkip([confirmationPassword], bypassEmpty),
+      status: Formz.validate([confirmationPassword]),
     ));
   }
 
@@ -123,7 +121,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     UserRegistrationSubmitted event,
     Emitter<UserState> emit,
   ) async {
-    if (!state.status.isValidated) return;
+    if (!state.status.isValidated) {
+      emit(state.copyWith(status: FormzStatus.submissionFailure));
+      return;
+    }
+
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
     try {
       await _userRepository.register(state.toFullDto());
@@ -137,9 +139,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     UserUpdateSubmitted event,
     Emitter<UserState> emit,
   ) async {
-    if (!state.status.isValidated) return;
-
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
+    if (!state.status.isValidated) {
+      emit(state.copyWith(status: FormzStatus.submissionFailure));
+      return;
+    }
+
     try {
       await _userRepository.update(state.toPartialDto());
       emit(state.copyWith(status: FormzStatus.submissionSuccess));

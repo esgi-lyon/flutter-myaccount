@@ -5,13 +5,11 @@ import 'package:formz/formz.dart';
 class FormMessage extends StatelessWidget {
   const FormMessage(
       {Key? key,
-      required this.status,
       required this.color,
       required this.validatedProperties,
-      this.infos,
+      this.isInfo,
       this.height})
       : super(key: key);
-  final FormzStatus status;
 
   final Color color;
 
@@ -19,7 +17,7 @@ class FormMessage extends StatelessWidget {
 
   final double? height;
 
-  final bool? infos;
+  final bool? isInfo;
 
   String translateIssue(dynamic f) => f?.toString().tr() ?? '';
 
@@ -45,17 +43,14 @@ class FormMessage extends StatelessWidget {
       itemCount: errors.length,
       controller: ScrollController(),
       itemBuilder: (BuildContext context, int i) {
-        return Text(
-          errors.elementAt(i),
-          textAlign: TextAlign.center,
-        );
+        return Text(errors.elementAt(i), textAlign: TextAlign.center);
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final messages = infos ?? false
+    final messages = isInfo ?? false
         ? parseInfos(validatedProperties)
         : parseErrors(validatedProperties);
     final double displayedHeight = messages.isNotEmpty ? (height ?? 40) : 0;
@@ -67,9 +62,10 @@ class FormMessage extends StatelessWidget {
         child: Align(child: _getListFromMessages(messages)));
   }
 
-  SnackBar getSnackBar(BuildContext context) => SnackBar(
-        padding: EdgeInsets.zero,
-        content: this,
-        duration: const Duration(seconds: 4),
-      );
+  showSnackBar(BuildContext context) => ScaffoldMessenger.of(context)
+    ..clearSnackBars
+    ..showSnackBar(SnackBar(
+      padding: EdgeInsets.zero,
+      content: this,
+    ));
 }

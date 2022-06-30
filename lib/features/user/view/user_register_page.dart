@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myaccount/app/simple_app_bar.dart';
 import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
+import 'package:myaccount/commons/widgets/form_message.dart';
 import 'package:myaccount/features/user/bloc/user_bloc.dart';
 import 'package:myaccount/features/user/view/user_form.dart';
 import 'package:myaccount/features/user/view/user_form_configs.dart';
@@ -26,7 +27,6 @@ class RegisterPage extends StatelessWidget {
               child: BlocProvider(
                 create: (context) {
                   return UserBloc(
-                    bypassEmpty: UserFormConfigs.registrationSkipEmpty,
                     userRepository:
                         RepositoryProvider.of<UserRepository>(context),
                   );
@@ -46,6 +46,10 @@ class RegisterPage extends StatelessWidget {
 
   _onSuccess(BuildContext context, UserState state) async {
     if (!state.status.isSubmissionSuccess) return;
+
+    FormMessage(
+        color: AppTheme.of(context).secondaryColor,
+        validatedProperties: ["register.sent".tr()]).showSnackBar(context);
 
     await Navigator.of(context)
         .pushNamedAndRemoveUntil(Routes.login, (r) => false);

@@ -8,18 +8,22 @@ import 'package:myaccount/commons/widgets/complex_button.dart';
 import 'package:myaccount/commons/widgets/complex_text_field.dart';
 import 'package:myaccount/features/login/login.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
 
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
   snackFromState(LoginState state, BuildContext context) {
-    if (state.status.isPure && state.status.isValid) return;
+    if (!state.status.isSubmissionFailure) return;
 
     final message = FormMessage(
-        status: state.status,
         color: AppTheme.of(context).tertiaryColor,
         validatedProperties: state.props);
 
-    ScaffoldMessenger.of(context).showSnackBar(message.getSnackBar(context));
+    ScaffoldMessenger.of(context).showSnackBar(message.showSnackBar(context));
   }
 
   @override
@@ -50,12 +54,14 @@ class _UsernameInput extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) => previous.username != current.username,
       builder: (context, state) {
-        return ComplexTextField(
+        return SimpleTextField(
           key: const Key('loginForm_usernameInput_textField'),
           onChanged: (username) =>
               context.read<LoginBloc>().add(LoginUsernameChanged(username)),
           hintText: 'login.hint'.tr(),
           labelText: 'login.email'.tr(),
+          errorText:
+              state.username.pure ? null : state.username.error?.toString(),
         );
       },
     );
@@ -68,12 +74,14 @@ class _PasswordInput extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
       buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
-        return ComplexTextField(
+        return SimpleTextField(
           key: const Key('loginForm_passwordInput_textField'),
           onChanged: (password) =>
               context.read<LoginBloc>().add(LoginPasswordChanged(password)),
           labelText: 'login.password.value'.tr(),
           hintText: 'login.password.hint'.tr(),
+          errorText:
+              state.password.pure ? null : state.password.error?.toString(),
         );
       },
     );
@@ -113,12 +121,9 @@ class _LoginButton extends StatelessWidget {
                 text: 'login.connect'.tr(),
                 key: const Key('loginForm_continue_raisedButton'),
                 options: ComplexButtonOptions.of(context),
-                onPressed: state.status.isValidated
-                    ? () {
-                        context.read<LoginBloc>().add(const LoginSubmitted());
-                      }
-                    : () {},
-              );
+                onPressed: () {
+                  context.read<LoginBloc>().add(const LoginSubmitted());
+                });
       },
     );
   }

@@ -24,7 +24,6 @@ class ProfilePage extends StatelessWidget {
               child: BlocProvider(
                 create: (context) {
                   return UserBloc(
-                    bypassEmpty: UserFormConfigs.updateAllSkipEmpty,
                     userRepository:
                         RepositoryProvider.of<UserRepository>(context),
                   );
