@@ -3,7 +3,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:myaccount/commons/validations/simple_boolean.dart';
-import 'package:myaccount/commons/extensions/formz_equatable.dart';
 import 'package:myaccount/features/user/validations/user_validations.dart';
 
 part 'login_event.dart';

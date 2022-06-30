@@ -325,7 +325,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                 await Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
                       builder: (context) =>
-                          NavBarPage(initialPage: Routes.home)),
+                          const NavBarPage(initialPage: Routes.home)),
                   (r) => false,
                 );
               },

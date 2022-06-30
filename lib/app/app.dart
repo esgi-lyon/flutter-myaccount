@@ -19,8 +19,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: authenticationRepository,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<UserRepository>(create: (context) => userRepository),
+        RepositoryProvider<AuthenticationRepository>(create: (context) => authenticationRepository),
+      ],
       child: BlocProvider(
         create: (_) => AuthenticationBloc(
           authenticationRepository: authenticationRepository,
@@ -43,8 +46,6 @@ class AppView extends StatefulWidget {
 class _AppViewState extends State<AppView> {
   final _navigatorKey = GlobalKey<NavigatorState>();
   ThemeMode _themeMode = AppTheme.themeMode;
-
-  NavigatorState get _navigator => _navigatorKey.currentState!;
 
   void setThemeMode(ThemeMode mode) => setState(() {
         _themeMode = mode;

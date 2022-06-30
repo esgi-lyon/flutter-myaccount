@@ -11,8 +11,6 @@ import 'package:myaccount/app/app.dart';
 import 'package:user_repository/user_repository.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 
-import 'package:myaccount/main.dart';
-
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.

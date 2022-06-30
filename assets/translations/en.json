@@ -4,6 +4,7 @@
     "form": {
         "required": "Required field" 
     },
+    "logout": "Logout",
     "login": {
         "email": "Email",
         "connect": "Connect",
@@ -13,10 +14,46 @@
             "value": "Password",
             "remember": "Remember password",
             "forgotten": "Forgotten password ?"
+        },
+        "password_confirmation": {
+            "value": "Password confirmation",
+            "hint": "Please confirm your password..."
         }
     },
+    "user": {
+        "name": {
+            "hint": "Enter your Name...",
+            "value": "Name"
+        },
+        "family_name": {
+            "hint": "Enter your family name..",
+            "value": "Family name"
+        },
+        "gender": {
+            "hint": "Enter your Gender...",
+            "value": "Gender"
+        },
+        "profile": "Change profile informations"
+    },
     "register": {
+        "success": "Successfuly resgistered",
         "value": "Register",
         "no_account": "Not registered ? "
-    }
+    },
+    "settings": {
+        "value": "Settings",
+        "hint": "Choose what special option you want and we will update the settings in our services.",
+        "locale": {
+            "value": "Change language",
+            "hint": "Switch to en or fr"
+        },
+        "biometric": {
+            "value": "Biometric authentication",
+            "hint": "Save your biometric authentication for next times"
+        }
+    },
+    "back": "back",
+    "saved": "saved successfully",
+    "apply": "apply",
+    "home": "Home"
 }

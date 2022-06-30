@@ -22,7 +22,7 @@ class InternalIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Material(
-        borderRadius:BorderRadius.circular(borderRadius),
+        borderRadius: BorderRadius.circular(borderRadius),
         color: Colors.transparent,
         clipBehavior: Clip.antiAlias,
         child: Ink(

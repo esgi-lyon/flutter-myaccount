@@ -58,7 +58,6 @@ class _UsernameInput extends StatelessWidget {
               context.read<LoginBloc>().add(LoginUsernameChanged(username)),
           hintText: 'login.hint'.tr(),
           labelText: 'login.email'.tr(),
-          errorText: ,
         );
       },
     );

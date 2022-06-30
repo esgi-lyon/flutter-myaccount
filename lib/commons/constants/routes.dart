@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:myaccount/commons/widgets/loading_indicator.dart';
-import 'package:myaccount/features/login/view/login_page.dart';
-import 'package:myaccount/pages/forgot.dart';
+import 'package:myaccount/features/login/view/login_view.dart';
+import 'package:myaccount/features/user/view/user_forgot.dart';
+import 'package:myaccount/features/user/view/user_view.dart';
 import 'package:myaccount/pages/home.dart';
-import 'package:myaccount/pages/profile.dart';
-import 'package:myaccount/pages/register.dart';
 import 'package:myaccount/pages/settings.dart';
 import 'package:myaccount/pages/splash_screen.dart';
 
@@ -23,16 +22,16 @@ class Routes {
     Routes.login: (context) => const LoginPage(),
     Routes.home: (context) => const Home(),
     Routes.splashScreen: (context) => const SplashScreen(),
-    Routes.profile: (context) => const Profile(),
+    Routes.profile: (context) => const ProfilePage(),
     Routes.settings: (context) => const Settings(),
-    Routes.register: (context) => const Register(),
-    Routes.forgot: (context) => const Forgot(),
+    Routes.register: (context) => const RegisterPage(),
+    Routes.forgot: (context) => const ForgotPage(),
     Routes.loading: (context) => const LoadingIndicator(),
   };
 
   static Map<String, WidgetBuilder> bottomMenu = {
     Routes.home: (context) => const Home(),
-    Routes.profile: (context) => const Profile(),
+    Routes.profile: (context) => const ProfilePage(),
     Routes.settings: (context) => const Settings()
   };
 }

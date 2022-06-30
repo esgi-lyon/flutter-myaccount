@@ -175,7 +175,8 @@ class _InternalButtonWidgetState extends State<InternalButtonWidget> {
     );
 
     if (widget.icon != null || widget.iconData != null) {
-      return SizedBox(
+      return GestureDetector(
+          child: SizedBox(
         height: widget.options.height,
         width: widget.options.width,
         child: ElevatedButton.icon(
@@ -193,10 +194,11 @@ class _InternalButtonWidgetState extends State<InternalButtonWidget> {
           onPressed: onPressed,
           style: style,
         ),
-      );
+      ));
     }
 
-    return SizedBox(
+    return GestureDetector(
+        child: SizedBox(
       height: widget.options.height,
       width: widget.options.width,
       child: ElevatedButton(
@@ -204,6 +206,6 @@ class _InternalButtonWidgetState extends State<InternalButtonWidget> {
         style: style,
         child: textWidget,
       ),
-    );
+    ));
   }
 }

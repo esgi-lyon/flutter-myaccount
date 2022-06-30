@@ -25,13 +25,58 @@ class UserPasswordChanged extends UserEvent {
   List<Object> get props => [password];
 }
 
-class UserPasswordConfirmationChanged extends UserEvent {
-  const UserPasswordConfirmationChanged(this.passwordConfirmation);
+class UserConfirmationPasswordChanged extends UserEvent {
+  const UserConfirmationPasswordChanged(this.passwordConfirmation);
 
-  final bool passwordConfirmation;
+  final String passwordConfirmation;
 
   @override
   List<Object> get props => [passwordConfirmation];
+}
+
+class UserNameChanged extends UserEvent {
+  const UserNameChanged(this.name);
+
+  final String name;
+
+  @override
+  List<Object> get props => [name];
+}
+
+class UserFamilyNameChanged extends UserEvent {
+  const UserFamilyNameChanged(this.familyName);
+
+  final String familyName;
+
+  @override
+  List<Object> get props => [familyName];
+}
+
+class UserPictureChanged extends UserEvent {
+  const UserPictureChanged(this.picture);
+
+  final String picture;
+
+  @override
+  List<Object> get props => [picture];
+}
+
+class UserBirthdateChanged extends UserEvent {
+  const UserBirthdateChanged(this.birthdate);
+
+  final String birthdate;
+
+  @override
+  List<Object> get props => [birthdate];
+}
+
+class UserGenderChanged extends UserEvent {
+  const UserGenderChanged(this.gender);
+
+  final String gender;
+
+  @override
+  List<Object> get props => [gender];
 }
 
 class UserUpdateSubmitted extends UserEvent {

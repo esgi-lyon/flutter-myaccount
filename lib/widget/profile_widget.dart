@@ -214,22 +214,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 ),
               ),
             ),
-            Builder(
-              builder: (context) {
-                final userId = context.select(
-                  (AuthenticationBloc bloc) => bloc.state.user.id,
-                );
-                return Text('UserID: $userId');
-              },
-            ),
-            ElevatedButton(
-              child: const Text('Logout'),
-              onPressed: () {
-                context
-                    .read<AuthenticationBloc>()
-                    .add(AuthenticationLogoutRequested());
-              },
-            ),
           ],
         ),
       ),

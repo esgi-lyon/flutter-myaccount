@@ -3,19 +3,21 @@ import 'package:myaccount/commons/theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class InternalTextField extends StatelessWidget {
-  const InternalTextField({
-    Key? key,
-    this.textController,
-    required this.labelText,
-    required this.hintText,
-    this.errorText,
-    this.onChanged,
-  }) : super(key: key);
+  const InternalTextField(
+      {Key? key,
+      this.textController,
+      required this.labelText,
+      required this.hintText,
+      this.errorText,
+      this.onChanged,
+      this.obscureText})
+      : super(key: key);
 
   final TextEditingController? textController;
   final String labelText;
   final String hintText;
   final String? errorText;
+  final bool? obscureText;
   final void Function(String)? onChanged;
 
   @override
@@ -38,7 +40,7 @@ class InternalTextField extends StatelessWidget {
         ),
         child: TextField(
           controller: textController,
-          obscureText: false,
+          obscureText: obscureText ?? false,
           onChanged: onChanged,
           decoration: InputDecoration(
             labelText: labelText.tr(),
