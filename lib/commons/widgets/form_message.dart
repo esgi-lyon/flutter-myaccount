@@ -2,46 +2,39 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 
-class FormMessage<T extends FormzStatus> extends StatelessWidget {
-  FormMessage(
+class FormMessage extends StatelessWidget {
+  const FormMessage(
       {Key? key,
       required this.status,
       required this.color,
-      this.submissionErrors,
-      this.validationErrors,
+      required this.validatedProperties,
       this.height})
-      : super(key: key) {
-    errors = _formatFormErrors();
-  }
-
-  final T status;
+      : super(key: key);
+  final FormzStatus status;
 
   final Color color;
 
-  final List<Object?>? submissionErrors;
-
-  final List<Object?>? validationErrors;
+  final List<Object?>? validatedProperties;
 
   final double? height;
 
-  late List<String> errors;
-
   String translateIssue(dynamic? f) => f?.toString().tr() ?? '';
 
-  List<String> filteredErrors(List<dynamic?>? errors) =>
-      errors?.where((e) => e != null).map(translateIssue).toList() ?? [];
+  List<String> parseErrors(List<dynamic?>? errors) =>
+      errors
+          ?.where((e) => e != null)
+          .where((e) => e is FormzInput && !e.pure)
+          .map((e) => (e as FormzInput).error)
+          .map(translateIssue)
+          .where((e) => e.isNotEmpty)
+          .toList() ??
+      [];
 
-  List<String> _formatFormErrors() {
-    if (status.isSubmissionFailure) {
-      return filteredErrors(submissionErrors);
-    } else if (status.isInvalid) {
-      return filteredErrors(validationErrors);
-    } else {
-      return [];
+  _getListFromErrors(List<String>? errors) {
+    if (errors == null || errors.isEmpty) {
+      return const Padding(padding: EdgeInsets.zero);
     }
-  }
 
-  _getListFromErrors(List<String> errors) {
     return ListView.builder(
       itemCount: errors.length,
       itemBuilder: (BuildContext context, int i) {
@@ -55,7 +48,8 @@ class FormMessage<T extends FormzStatus> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double displayedHeight = needToBeDisplayed ? height ?? 50 : 0;
+    final errors = parseErrors(validatedProperties);
+    final double displayedHeight = errors.isNotEmpty ? height ?? 50 : 0;
     return Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
         color: color,
@@ -63,12 +57,10 @@ class FormMessage<T extends FormzStatus> extends StatelessWidget {
         child: Align(child: _getListFromErrors(errors)));
   }
 
-  get needToBeDisplayed => errors.isNotEmpty;
-
   SnackBar getSnackBar(BuildContext context) {
     return SnackBar(
         padding: EdgeInsets.zero,
-        duration: const Duration(milliseconds: 10000),
+        duration: const Duration(seconds: 5),
         content: this);
   }
 }

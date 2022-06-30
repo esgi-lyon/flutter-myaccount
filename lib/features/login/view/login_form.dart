@@ -12,16 +12,12 @@ class LoginForm extends StatelessWidget {
   const LoginForm({Key? key}) : super(key: key);
 
   snackFromState(LoginState state, BuildContext context) {
-    var message = FormMessage(
+    if (state.status.isPure && state.status.isValid) return;
+
+    final message = FormMessage(
         status: state.status,
         color: AppTheme.of(context).tertiaryColor,
-        submissionErrors: [
-          state.status.name
-        ],
-        validationErrors: [
-          state.password.error,
-          state.username.error
-        ]);
+        validatedProperties: state.props);
 
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
@@ -62,6 +58,7 @@ class _UsernameInput extends StatelessWidget {
               context.read<LoginBloc>().add(LoginUsernameChanged(username)),
           hintText: 'login.hint'.tr(),
           labelText: 'login.email'.tr(),
+          errorText: ,
         );
       },
     );
@@ -94,11 +91,11 @@ class _PasswordSaveCheckbox extends StatelessWidget {
           previous.passwordSave != current.passwordSave,
       builder: (context, state) {
         return CheckboxListTile(
-          value: state.passwordSave,
+          value: state.passwordSave.value,
           key: const Key('loginForm_passwordSave_checkbox'),
           onChanged: (v) => context
               .read<LoginBloc>()
-              .add(LoginPasswordSaveChanged(!state.passwordSave)),
+              .add(LoginPasswordSaveChanged(v ?? false)),
           title: const Text("login.password.remember").tr(),
           activeColor: AppTheme.of(context).secondaryColor,
         );

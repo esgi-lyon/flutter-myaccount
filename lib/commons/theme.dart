@@ -180,13 +180,5 @@ extension TextStyleHelper on TextStyle {
             );
 }
 
-extension StringExt on String {
-  String maybeHandleOverflow(
-          {required int maxChars, String replacement = ''}) =>
-      maxChars != null && length > maxChars
-          ? replaceRange(maxChars, null, replacement)
-          : this;
-}
-
 void setDarkModeSetting(BuildContext context, ThemeMode themeMode) =>
     AppView.of(context).setThemeMode(themeMode);

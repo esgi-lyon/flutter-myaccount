@@ -4,7 +4,6 @@ import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/widgets/loading_indicator.dart';
 import 'package:myaccount/features/authentication/authentication.dart';
 import 'package:myaccount/features/login/view/login_page.dart';
-import 'package:myaccount/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
