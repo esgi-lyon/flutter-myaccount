@@ -1,8 +1,15 @@
 import 'package:equatable/equatable.dart';
 
 class PartialUserDto extends Equatable {
-  const PartialUserDto(this.name, this.email, this.familyName, this.picture,
-      this.birthdate, this.gender, this.password, this.confirmationPassword);
+  const PartialUserDto(
+      {this.name,
+      this.email,
+      this.familyName,
+      this.picture,
+      this.birthdate,
+      this.gender,
+      this.password,
+      this.confirmationPassword});
 
   final String? name;
 

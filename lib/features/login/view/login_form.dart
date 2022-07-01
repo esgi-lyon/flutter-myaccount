@@ -23,7 +23,7 @@ class _LoginFormState extends State<LoginForm> {
         color: AppTheme.of(context).tertiaryColor,
         validatedProperties: state.props);
 
-    ScaffoldMessenger.of(context).showSnackBar(message.showSnackBar(context));
+    message.showSnackBar(context);
   }
 
   @override
@@ -61,7 +61,7 @@ class _UsernameInput extends StatelessWidget {
           hintText: 'login.hint'.tr(),
           labelText: 'login.email'.tr(),
           errorText:
-              state.username.pure ? null : state.username.error?.toString(),
+              state.username.pure ? null : state.username.error?.toString().tr(),
         );
       },
     );
@@ -81,7 +81,7 @@ class _PasswordInput extends StatelessWidget {
           labelText: 'login.password.value'.tr(),
           hintText: 'login.password.hint'.tr(),
           errorText:
-              state.password.pure ? null : state.password.error?.toString(),
+              state.password.pure ? null : state.password.error?.toString().tr(),
         );
       },
     );

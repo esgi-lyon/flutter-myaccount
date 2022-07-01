@@ -8,6 +8,8 @@ Use vscode workspace recommandations and verify flutter toolchain with `flutter 
 
 ## Resources
 
+- Translations : https://file-translate.com/en/app/json-translate
+
 - [Current step](https://bloclibrary.dev/#/flutterlogintutorial?id=authentication-bloc)
 
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)

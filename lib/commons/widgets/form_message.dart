@@ -19,20 +19,26 @@ class FormMessage extends StatelessWidget {
 
   final bool? isInfo;
 
-  String translateIssue(dynamic f) => f?.toString().tr() ?? '';
+  String translateIssue(String f) => f.tr();
 
-  List<String> parseErrors(List<dynamic>? errors) =>
+  List<String>? parseErrors(List<dynamic>? errors) =>
       errors
           ?.where((e) => e != null)
-          .where((e) => e is FormzInput && !e.pure)
-          .map((e) => (e as FormzInput).error)
+          .whereType<FormzInput>()
+          .where((e) => !e.pure)
+          .map((e) => e.error.toString())
           .map(translateIssue)
           .where((e) => e.isNotEmpty)
           .toList() ??
       [];
 
   List<String> parseInfos(List<dynamic>? errors) =>
-      errors?.where((e) => e != null).map(translateIssue).toList() ?? [];
+      errors
+          ?.where((e) => e != null)
+          .whereType<String>()
+          .map(translateIssue)
+          .toList() ??
+      [];
 
   _getListFromMessages(List<String>? errors) {
     if (errors == null || errors.isEmpty) {
@@ -52,7 +58,7 @@ class FormMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final messages = isInfo ?? false
         ? parseInfos(validatedProperties)
-        : parseErrors(validatedProperties);
+        : parseErrors(validatedProperties) ?? [];
     final double displayedHeight = messages.isNotEmpty ? (height ?? 40) : 0;
 
     return Container(
@@ -64,6 +70,7 @@ class FormMessage extends StatelessWidget {
 
   showSnackBar(BuildContext context) => ScaffoldMessenger.of(context)
     ..clearSnackBars
+    ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(
       padding: EdgeInsets.zero,
       content: this,

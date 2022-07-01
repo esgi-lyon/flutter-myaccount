@@ -2,9 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myaccount/app/simple_app_bar.dart';
-import 'package:myaccount/commons/constants/routes.dart';
 import 'package:myaccount/commons/theme.dart';
-import 'package:myaccount/commons/widgets/form_message.dart';
 import 'package:myaccount/features/user/bloc/user_bloc.dart';
 import 'package:myaccount/features/user/view/user_form.dart';
 import 'package:myaccount/features/user/view/user_form_configs.dart';
@@ -36,22 +34,17 @@ class RegisterPage extends StatelessWidget {
                   padding: EdgeInsets.all(size.width - size.width * .90),
                   alignment: Alignment.center,
                   child: BlocListener<UserBloc, UserState>(
-                      listener: _onSuccess,
-                      child:
-                          UserForm(inputs: UserFormConfigs.registrationinputs)),
+                      listener: ((context, state) =>
+                          state.status.isSubmissionSuccess
+                              ? Navigator.of(context).maybePop()
+                              : null),
+                      child: UserForm(
+                        inputs: UserFormConfigs.registrationinputs,
+                        successMessage: 'saved'.tr(),
+                        failedMessage: 'failed'.tr(),
+                      )),
                 ),
               )),
         ));
-  }
-
-  _onSuccess(BuildContext context, UserState state) async {
-    if (!state.status.isSubmissionSuccess) return;
-
-    FormMessage(
-        color: AppTheme.of(context).secondaryColor,
-        validatedProperties: ["register.sent".tr()]).showSnackBar(context);
-
-    await Navigator.of(context)
-        .pushNamedAndRemoveUntil(Routes.login, (r) => false);
   }
 }

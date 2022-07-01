@@ -46,24 +46,24 @@ class UserState extends Equatable {
   }
 
   toPartialDto() => PartialUserDto(
-      name.value.toNullIfEmpty(),
-      email.value.toNullIfEmpty(),
-      familyName.value.toNullIfEmpty(),
-      picture.value.toNullIfEmpty(),
-      birthdate.value.toNullIfEmpty(),
-      gender.value.toNullIfEmpty(),
-      password.value.toNullIfEmpty(),
-      confirmationPassword.value.toNullIfEmpty());
+      name: name.value.toNullIfEmpty(),
+      email: email.value.toNullIfEmpty(),
+      familyName: familyName.value.toNullIfEmpty(),
+      picture: picture.value.toNullIfEmpty(),
+      birthdate: birthdate.value.toNullIfEmpty(),
+      gender: gender.value.toNullIfEmpty(),
+      password: password.value.toNullIfEmpty(),
+      confirmationPassword: confirmationPassword.value.toNullIfEmpty());
 
-  toFullDto() => PartialUserDto(
-      name.value,
-      email.value,
-      familyName.value,
-      picture.value,
-      birthdate.value,
-      gender.value,
-      password.value,
-      confirmationPassword.value);
+  toFullDto() => FullUserDto(
+      name: name.value,
+      email: email.value,
+      familyName: familyName.value,
+      picture: picture.value,
+      birthdate: birthdate.value,
+      gender: gender.value,
+      password: password.value,
+      confirmationPassword: confirmationPassword.value);
 
   @override
   List<Object> get props => [

@@ -3,6 +3,7 @@
     "app": "My account",
     "back": "back",
     "saved": "saved successfully",
+    "failed": "Failed submission",
     "apply": "apply",
     "home": "Home",
     "form": {
@@ -61,10 +62,6 @@
             "hint": "Save your biometric authentication for next times"
         }
     },
-    "EmailValidationError": {
-        "invalid": "Invalid email"
-    },
-    "PasswordValidationError": {
-        "empty": "Invalid password"
-    }
+    "EmailValidationError.invalid": "Invalid email",
+    "PasswordValidationError.empty": "Invalid password"
 }

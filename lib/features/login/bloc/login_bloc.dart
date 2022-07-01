@@ -3,7 +3,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:myaccount/commons/validations/simple_boolean.dart';
-import 'package:myaccount/commons/extensions/formz_equatable.dart';
 import 'package:myaccount/features/user/validations/user_validations.dart';
 
 part 'login_event.dart';
@@ -29,7 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final username = Email.dirty(event.username);
     emit(state.copyWith(
       username: username,
-      status: Formz.validate([username]),
+      status: Formz.validate([username, state.password, state.passwordSave]),
     ));
   }
 
@@ -40,7 +39,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final password = Password.dirty(event.password);
     emit(state.copyWith(
       password: password,
-      status: Formz.validate([password]),
+      status: Formz.validate([state.username, password, state.passwordSave]),
     ));
   }
 
@@ -51,7 +50,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final passwordSave = SimpleBoolean.dirty(event.passwordSave);
     emit(state.copyWith(
       passwordSave: passwordSave,
-      status: Formz.validate([passwordSave]),
+      status: Formz.validate([state.username, state.password, passwordSave]),
     ));
   }
 
@@ -59,12 +58,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginSubmitted event,
     Emitter<LoginState> emit,
   ) async {
-    emit(state.copyWith(status: FormzStatus.submissionInProgress));
-
-    if (Formz.validate(state.parseInputs()).isInvalid) {
+    if (state.status.isInvalid || state.status.isPure) {
       emit(state.copyWith(status: FormzStatus.submissionFailure));
       return;
     }
+
+    emit(state.copyWith(status: FormzStatus.submissionInProgress));
 
     try {
       await _authenticationRepository.logIn(
